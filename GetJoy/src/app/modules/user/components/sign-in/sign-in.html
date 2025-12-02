@@ -1,1 +1,96 @@
-<p>sign-in works!</p>
+<div class="signin-container">
+  <!-- Joyful Travel Decorations -->
+  <div class="travel-decoration deco-1">✈️</div>
+  <div class="travel-decoration deco-2">🌴</div>
+  <div class="travel-decoration deco-3">🏝️</div>
+  <div class="travel-decoration deco-4">🗺️</div>
+  
+  <div class="signin-content">
+    <!-- Alert Messages -->
+    <div *ngIf="showAlert" [class]="'alert alert-' + alertType">
+      <div class="alert-content">
+        <div class="alert-icon">
+          <svg *ngIf="alertType === 'success'" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          <svg *ngIf="alertType === 'error'" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          </svg>
+          <svg *ngIf="alertType === 'warning'" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="alert-message">
+          <p>{{ alertMessage }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Joyful Sign In Form -->
+    <div class="signin-form-container">
+      <div class="signin-header">
+        <div class="getjoy-logo">GetJoy</div>
+        <h2 class="signin-title">Adventure Awaits! 🌟</h2>
+        <p class="signin-subtitle">Sign in to unlock amazing travel experiences</p>
+      </div>
+
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="signin-form">
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email" class="form-label">
+            Email Address
+          </label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            [class]="getInputClass(email)"
+            placeholder="your@email.com">
+          <div *ngIf="email?.invalid && email?.touched" class="error-messages">
+            <div *ngIf="email?.errors?.['required']">Email is required</div>
+            <div *ngIf="email?.errors?.['email']">Please enter a valid email</div>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="form-label">
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            [class]="getInputClass(password)"
+            placeholder="Enter your password">
+          <div *ngIf="password?.invalid && password?.touched" class="error-messages">
+            <div *ngIf="password?.errors?.['required']">Password is required</div>
+            <div *ngIf="password?.errors?.['minlength']">
+              Password must be at least 4 characters
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          [disabled]="isLoading"
+          [class]="getButtonClass()"
+          class="submit-button">
+          <span *ngIf="isLoading" class="loading-spinner"></span>
+          {{ isLoading ? 'Signing In...' : 'Start Your Journey 🚀' }}
+        </button>
+
+        <!-- Sign Up Link -->
+        <div class="signup-link-container">
+          <p class="signup-text">
+            New to GetJoy?
+            <a routerLink="/signup" class="signup-link">
+              Join the Adventure!
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
