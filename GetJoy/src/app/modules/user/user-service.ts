@@ -12,6 +12,7 @@ export class UserService {
   private apiUrl = 'http://localhost:3000/users';
   private currentUserSubject = new BehaviorSubject<any>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
+  private destinationsUrl = 'http://localhost:3000/destinations';
 
   constructor(private http: HttpClient) {}
 
@@ -77,6 +78,78 @@ export class UserService {
     localStorage.removeItem('currentUser');
   }
 
+  // Like functionality
+  private likesUrl = 'http://localhost:3000/likes';
+
+  likeDestination(userId: number, destinationId: number): Observable<any> {
+    const like = {
+      userId: userId,
+      destinationId: destinationId,
+      hotelId: null
+    };
+    return this.http.post<any>(this.likesUrl, like).pipe(
+      switchMap(() => {
+        // Update the destination's likes count
+        return this.updateDestinationLikes(destinationId, true);
+      })
+    );
+  }
+
+  private updateDestinationLikes(destinationId: number, increment: boolean): Observable<any> {
+    return this.http.get<any>(`${this.destinationsUrl}/${destinationId}`).pipe(
+      switchMap(destination => {
+        const updatedDestination = {
+          ...destination,
+          likes: increment 
+            ? (destination.likes || 0) + 1 
+            : Math.max((destination.likes || 0) - 1, 0)
+        };
+        return this.http.put<any>(`${this.destinationsUrl}/${destinationId}`, updatedDestination);
+      })
+    );
+  }
+
+  likeHotel(userId: number, hotelId: number): Observable<any> {
+    const like = {
+      userId: userId,
+      destinationId: null,
+      hotelId: hotelId
+    };
+    return this.http.post<any>(this.likesUrl, like);
+  }
+
+  unlikeDestination(userId: number, destinationId: number): Observable<any> {
+    return this.http.get<any[]>(this.likesUrl).pipe(
+      switchMap(likes => {
+        const like = likes.find(l => l.userId === userId && l.destinationId === destinationId);
+        if (like) {
+          return this.http.delete<any>(`${this.likesUrl}/${like.id}`).pipe(
+            switchMap(() => {
+              // Update the destination's likes count
+              return this.updateDestinationLikes(destinationId, false);
+            })
+          );
+        }
+        return throwError(() => ({ customError: 'Like not found' }));
+      })
+    );
+  }
+
+  unlikeHotel(userId: number, hotelId: number): Observable<any> {
+    return this.http.get<any[]>(this.likesUrl).pipe(
+      switchMap(likes => {
+        const like = likes.find(l => l.userId === userId && l.hotelId === hotelId);
+        if (like) {
+          return this.http.delete<any>(`${this.likesUrl}/${like.id}`);
+        }
+        return throwError(() => ({ customError: 'Like not found' }));
+      })
+    );
+  }
+
+  getUserLikes(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.likesUrl}?userId=${userId}`);
+  }
 
   
 }

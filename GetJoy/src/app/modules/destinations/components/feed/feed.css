@@ -1,0 +1,302 @@
+/* GetJoy Feed - Travel Agency Inspired Design */
+
+/* Main Container */
+.feed-container {
+  @apply min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50;
+  padding: 2rem 1rem;
+}
+
+/* Header Section */
+.feed-header {
+  @apply max-w-6xl mx-auto mb-12;
+}
+
+.header-content {
+  @apply text-center;
+}
+
+.page-title {
+  @apply text-4xl md:text-5xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3;
+}
+
+.title-icon {
+  @apply w-12 h-12 text-cyan-600;
+  animation: pulse 2s infinite;
+}
+
+.page-subtitle {
+  @apply text-lg text-gray-600 max-w-2xl mx-auto;
+}
+
+/* Loading State */
+.loading-container {
+  @apply flex items-center justify-center min-h-[400px];
+}
+
+.loading-spinner {
+  @apply text-center;
+}
+
+.spinner {
+  @apply w-16 h-16 border-4 border-cyan-200 border-t-cyan-600 rounded-full mx-auto mb-4;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  @apply text-gray-600 text-lg;
+}
+
+/* Destinations Grid */
+.destinations-grid {
+  @apply max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+/* Destination Card */
+.destination-card {
+  @apply bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 relative flex flex-col;
+  animation: cardFadeIn 0.6s ease-out forwards;
+  height: 100%;
+}
+
+/* Card Image Container */
+.card-image-container {
+  @apply relative overflow-hidden;
+  height: 280px;
+}
+
+.card-image {
+  @apply w-full h-full object-cover transition-transform duration-700 hover:scale-110;
+}
+
+/* Like Button */
+.like-button {
+  @apply absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:bg-white hover:scale-110 shadow-lg border-none cursor-pointer;
+}
+
+/* Likes Badge */
+.likes-badge {
+  @apply absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-full flex items-center gap-2 shadow-lg;
+}
+
+.likes-badge-icon {
+  @apply w-4 h-4 text-red-400;
+}
+
+.likes-badge-text {
+  @apply text-sm font-medium;
+}
+
+.like-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.heart-icon {
+  @apply w-6 h-6 text-gray-400 transition-colors duration-300;
+}
+
+.like-button.liked .heart-icon {
+  @apply text-red-500;
+  animation: heartBeat 0.5s ease;
+}
+
+.like-button:hover:not(:disabled) .heart-icon {
+  @apply text-red-400;
+}
+
+/* Price Badge */
+.price-badge {
+  @apply absolute bottom-4 left-4 bg-cyan-600 text-white px-4 py-2 rounded-full shadow-lg;
+}
+
+.price-text {
+  @apply font-semibold text-sm;
+}
+
+/* Card Content */
+.card-content {
+  @apply p-6 flex-1 flex flex-col;
+}
+
+/* Location Badge */
+.location-badge {
+  @apply inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium w-fit;
+}
+
+.location-icon {
+  @apply w-4 h-4;
+}
+
+/* Destination Title */
+.destination-title {
+  @apply text-xl font-bold text-gray-900 leading-tight mt-4;
+}
+
+/* Rating Container */
+.rating-container {
+  @apply flex items-center gap-3 mt-3;
+}
+
+.stars {
+  @apply flex gap-1;
+}
+
+.star {
+  @apply w-5 h-5 text-gray-300 transition-colors duration-200;
+}
+
+.star.filled {
+  @apply text-yellow-400;
+}
+
+.rating-value {
+  @apply text-sm font-semibold text-gray-700;
+}
+
+/* Description */
+.destination-description {
+  @apply text-gray-600 leading-relaxed text-sm flex-1 mt-4;
+}
+
+/* Card Actions */
+.card-actions {
+  @apply pt-4 mt-auto;
+}
+
+.explore-button {
+  @apply w-full bg-transparent border-2 border-cyan-600 text-cyan-600 font-semibold py-3 px-6 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 hover:bg-cyan-600 hover:text-white hover:shadow-lg hover:-translate-y-1 cursor-pointer;
+}
+
+.button-icon {
+  @apply w-5 h-5;
+}
+
+/* Empty State */
+.empty-state {
+  @apply max-w-md mx-auto text-center py-16 col-span-full;
+}
+
+.empty-icon {
+  @apply w-24 h-24 text-gray-400 mx-auto mb-6;
+}
+
+.empty-title {
+  @apply text-2xl font-bold text-gray-700 mb-4;
+}
+
+.empty-description {
+  @apply text-gray-500;
+}
+
+/* Animations */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .feed-container {
+    padding: 1rem;
+  }
+  
+  .page-title {
+    @apply text-3xl;
+  }
+  
+  .title-icon {
+    @apply w-10 h-10;
+  }
+  
+  .destinations-grid {
+    @apply grid-cols-1 gap-6;
+  }
+  
+  .card-image-container {
+    height: 220px;
+  }
+  
+  .card-content {
+    @apply p-4 space-y-3;
+  }
+  
+  .destination-title {
+    @apply text-lg;
+  }
+}
+
+@media (max-width: 480px) {
+  .feed-container {
+    padding: 0.5rem;
+  }
+  
+  .page-title {
+    @apply text-2xl;
+  }
+  
+  .card-image-container {
+    height: 200px;
+  }
+  
+  .like-button {
+    @apply w-10 h-10 top-3 right-3;
+  }
+  
+  .heart-icon {
+    @apply w-5 h-5;
+  }
+  
+  .price-badge {
+    @apply bottom-3 left-3 px-3 py-1;
+  }
+}
+
+/* Hover Effects for Cards */
+.destination-card:hover .card-image {
+  filter: brightness(1.1);
+}
+
+.destination-card:hover .like-button {
+  transform: scale(1.05);
+}
+
+.destination-card:hover .destination-title {
+  @apply text-cyan-600;
+}
+
+/* Staggered Animation for Cards */
+.destination-card:nth-child(1) { animation-delay: 0.1s; }
+.destination-card:nth-child(2) { animation-delay: 0.2s; }
+.destination-card:nth-child(3) { animation-delay: 0.3s; }
+.destination-card:nth-child(4) { animation-delay: 0.4s; }
+.destination-card:nth-child(5) { animation-delay: 0.5s; }
+.destination-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Gradient Overlay for Better Text Readability */
+.card-image-container::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 pointer-events-none;
+}
+
+.like-button, .price-badge {
+  z-index: 20;
+}

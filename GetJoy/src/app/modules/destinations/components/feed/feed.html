@@ -1,1 +1,120 @@
-<p>feed works!</p>
+<!-- Feed Container -->
+<div class="feed-container">
+  <!-- Header Section -->
+  <div class="feed-header">
+    <div class="header-content">
+      <h1 class="page-title">
+        <svg class="title-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Discover Amazing Destinations
+      </h1>
+      <p class="page-subtitle">Explore breathtaking locations around the world and create unforgettable memories</p>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p class="loading-text">Discovering amazing destinations...</p>
+    </div>
+  </div>
+
+  <!-- Destinations Grid -->
+  <div *ngIf="!loading" class="destinations-grid">
+    <div 
+      *ngFor="let destination of destinations; trackBy: trackByDestination" 
+      class="destination-card"
+      [attr.data-destination-id]="destination.id">
+      
+      <!-- Destination Image -->
+      <div class="card-image-container">
+        <img 
+          [src]="destination.imageUrl" 
+          [alt]="destination.name"
+          class="card-image"
+          (error)="onImageError($event)"
+          loading="lazy">
+        
+        <!-- Likes Badge -->
+        <div class="likes-badge" *ngIf="destination.likes !== undefined">
+          <svg class="likes-badge-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+          </svg>
+          <span class="likes-badge-text">{{ destination.likes || 0 }}</span>
+        </div>
+        
+        <!-- Like Button -->
+        <button 
+          class="like-button"
+          [class.liked]="destination.isLiked"
+          (click)="toggleLike(destination)"
+          [disabled]="!currentUser">
+          <svg class="heart-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+
+        <!-- Price Badge -->
+        <div class="price-badge" *ngIf="destination.price">
+          <span class="price-text">From ${{ destination.price }}</span>
+        </div>
+      </div>
+
+      <!-- Card Content -->
+      <div class="card-content">
+        <!-- Location Badge -->
+        <div class="location-badge">
+          <svg class="location-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+          </svg>
+          {{ destination.location }}
+        </div>
+
+        <!-- Destination Title -->
+        <h3 class="destination-title">{{ destination.name }}</h3>
+
+        <!-- Rating -->
+        <div class="rating-container" *ngIf="destination.rating">
+          <div class="stars">
+            <svg 
+              *ngFor="let filled of getStarArray(destination.rating); index as i" 
+              class="star"
+              [class.filled]="filled"
+              fill="currentColor" 
+              viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+          </div>
+          <span class="rating-value">{{ destination.rating }}</span>
+        </div>
+
+        <!-- Description -->
+        <p class="destination-description">{{ destination.description }}</p>
+
+        <!-- Action Buttons -->
+        <div class="card-actions">
+          <button 
+            class="explore-button"
+            (click)="viewDestination(destination.id)">
+            <svg class="button-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+            Explore More
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && destinations.length === 0" class="empty-state">
+    <svg class="empty-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+    </svg>
+    <h3 class="empty-title">No Destinations Found</h3>
+    <p class="empty-description">Check back later for amazing travel destinations!</p>
+  </div>
+</div>
