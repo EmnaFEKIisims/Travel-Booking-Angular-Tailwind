@@ -1,16 +1,33 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "fullName": "Emna Fki",
       "email": "emna@gmail.com",
       "password": "12345"
+    },
+    {
+      "id": 2,
+      "fullName": "Nuhee Boughnim",
+      "email": "nuhee@gmail.com",
+      "password": "11111"
+    },
+    {
+      "id": 3,
+      "fullName": "Eya Bouaziz",
+      "email": "eya@gmail.com",
+      "password": "22222"
+    },
+    {
+      "id": 4,
+      "fullName": "Rami Drira",
+      "email": "rami@gmail.com",
+      "password": "33333"
     }
   ],
-
   "destinations": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Paris",
       "country": "France",
       "description": "City of lights",
@@ -19,7 +36,7 @@
       "liked": false
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Tokyo",
       "country": "Japan",
       "description": "Modern city with ancient traditions",
@@ -28,7 +45,7 @@
       "liked": false
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Dubai",
       "country": "UAE",
       "description": "Luxury and futuristic skyscrapers",
@@ -37,7 +54,7 @@
       "liked": false
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Rome",
       "country": "Italy",
       "description": "Historic monuments and Italian culture",
@@ -46,7 +63,7 @@
       "liked": false
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Bali",
       "country": "Indonesia",
       "description": "Tropical paradise",
@@ -55,75 +72,369 @@
       "liked": false
     }
   ],
-
   "hotels": [
-    { "id": 1, "destinationId": 1, "name": "Hotel Eiffel", "address": "Paris Center", "stars": 4, "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945", "likes": 10, "liked": false },
-    { "id": 2, "destinationId": 1, "name": "Paris Luxury Stay", "address": "Champs-Élysées", "stars": 5, "image": "https://images.unsplash.com/photo-1576675789066-0b7d4b6a9b1a", "likes": 18, "liked": false },
-    { "id": 3, "destinationId": 1, "name": "Budget Inn Paris", "address": "Montmartre", "stars": 3, "image": "https://images.unsplash.com/photo-1582719478181-45df7f214a40", "likes": 6, "liked": false },
-
-    { "id": 4, "destinationId": 2, "name": "Tokyo Garden Hotel", "address": "Shinjuku", "stars": 4, "image": "https://images.unsplash.com/photo-1560847473-8e6ff6e7d5c0", "likes": 11, "liked": false },
-    { "id": 5, "destinationId": 2, "name": "Sakura Stay", "address": "Shibuya", "stars": 5, "image": "https://images.unsplash.com/photo-1552715701-6d37d576ae4c", "likes": 15, "liked": false },
-    { "id": 6, "destinationId": 2, "name": "Tokyo Capsule Hotel", "address": "Akihabara", "stars": 3, "image": "https://images.unsplash.com/photo-1560347876-aeef00ee58a1", "likes": 8, "liked": false },
-
-    { "id": 7, "destinationId": 3, "name": "Dubai Palm Resort", "address": "Palm Jumeirah", "stars": 5, "image": "https://images.unsplash.com/photo-1576666118261-4d3b1a3e9a2f", "likes": 20, "liked": false },
-    { "id": 8, "destinationId": 3, "name": "Desert Pearl Hotel", "address": "Downtown Dubai", "stars": 4, "image": "https://images.unsplash.com/photo-1576675789066-0b7d4b6a9b1a", "likes": 13, "liked": false },
-    { "id": 9, "destinationId": 3, "name": "Dubai Budget Rooms", "address": "Bur Dubai", "stars": 3, "image": "https://images.unsplash.com/photo-1576675789042-5a0b6b80b1e2", "likes": 7, "liked": false },
-
-    { "id": 10, "destinationId": 4, "name": "Rome Colosseum View", "address": "Centro Storico", "stars": 4, "image": "https://images.unsplash.com/photo-1535930749574-1399327ce78f", "likes": 9, "liked": false },
-    { "id": 11, "destinationId": 4, "name": "Roman Holiday Hotel", "address": "Trastevere", "stars": 5, "image": "https://images.unsplash.com/photo-1582719478191-46c7f214a41b", "likes": 14, "liked": false },
-    { "id": 12, "destinationId": 4, "name": "Rome Cozy Stay", "address": "Vatican area", "stars": 3, "image": "https://images.unsplash.com/photo-1582719478195-47d7f214a41c", "likes": 5, "liked": false },
-
-    { "id": 13, "destinationId": 5, "name": "Bali Tropical Resort", "address": "Ubud", "stars": 5, "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e", "likes": 22, "liked": false },
-    { "id": 14, "destinationId": 5, "name": "Bali Beach Hotel", "address": "Kuta Beach", "stars": 4, "image": "https://images.unsplash.com/photo-1507525428035-b723cf961d3f", "likes": 18, "liked": false },
-    { "id": 15, "destinationId": 5, "name": "Bali Budget Home", "address": "Denpasar", "stars": 3, "image": "https://images.unsplash.com/photo-1507525428036-b723cf961d40", "likes": 9, "liked": false }
+    {
+      "id": "1",
+      "destinationId": 1,
+      "name": "Hotel Eiffel",
+      "address": "Paris Center",
+      "stars": 4,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+      "likes": 10,
+      "liked": false
+    },
+    {
+      "id": "2",
+      "destinationId": 1,
+      "name": "Paris Luxury Stay",
+      "address": "Champs-Élysées",
+      "stars": 5,
+      "image": "https://images.unsplash.com/photo-1576675789066-0b7d4b6a9b1a",
+      "likes": 18,
+      "liked": false
+    },
+    {
+      "id": "3",
+      "destinationId": 1,
+      "name": "Budget Inn Paris",
+      "address": "Montmartre",
+      "stars": 3,
+      "image": "https://images.unsplash.com/photo-1582719478181-45df7f214a40",
+      "likes": 6,
+      "liked": false
+    },
+    {
+      "id": "4",
+      "destinationId": 2,
+      "name": "Tokyo Garden Hotel",
+      "address": "Shinjuku",
+      "stars": 4,
+      "image": "https://images.unsplash.com/photo-1560847473-8e6ff6e7d5c0",
+      "likes": 11,
+      "liked": false
+    },
+    {
+      "id": "5",
+      "destinationId": 2,
+      "name": "Sakura Stay",
+      "address": "Shibuya",
+      "stars": 5,
+      "image": "https://images.unsplash.com/photo-1552715701-6d37d576ae4c",
+      "likes": 15,
+      "liked": false
+    },
+    {
+      "id": "6",
+      "destinationId": 2,
+      "name": "Tokyo Capsule Hotel",
+      "address": "Akihabara",
+      "stars": 3,
+      "image": "https://images.unsplash.com/photo-1560347876-aeef00ee58a1",
+      "likes": 8,
+      "liked": false
+    },
+    {
+      "id": "7",
+      "destinationId": 3,
+      "name": "Dubai Palm Resort",
+      "address": "Palm Jumeirah",
+      "stars": 5,
+      "image": "https://images.unsplash.com/photo-1576666118261-4d3b1a3e9a2f",
+      "likes": 20,
+      "liked": false
+    },
+    {
+      "id": "8",
+      "destinationId": 3,
+      "name": "Desert Pearl Hotel",
+      "address": "Downtown Dubai",
+      "stars": 4,
+      "image": "https://images.unsplash.com/photo-1576675789066-0b7d4b6a9b1a",
+      "likes": 13,
+      "liked": false
+    },
+    {
+      "id": "9",
+      "destinationId": 3,
+      "name": "Dubai Budget Rooms",
+      "address": "Bur Dubai",
+      "stars": 3,
+      "image": "https://images.unsplash.com/photo-1576675789042-5a0b6b80b1e2",
+      "likes": 7,
+      "liked": false
+    },
+    {
+      "id": "10",
+      "destinationId": 4,
+      "name": "Rome Colosseum View",
+      "address": "Centro Storico",
+      "stars": 4,
+      "image": "https://images.unsplash.com/photo-1535930749574-1399327ce78f",
+      "likes": 9,
+      "liked": false
+    },
+    {
+      "id": "11",
+      "destinationId": 4,
+      "name": "Roman Holiday Hotel",
+      "address": "Trastevere",
+      "stars": 5,
+      "image": "https://images.unsplash.com/photo-1582719478191-46c7f214a41b",
+      "likes": 14,
+      "liked": false
+    },
+    {
+      "id": "12",
+      "destinationId": 4,
+      "name": "Rome Cozy Stay",
+      "address": "Vatican area",
+      "stars": 3,
+      "image": "https://images.unsplash.com/photo-1582719478195-47d7f214a41c",
+      "likes": 5,
+      "liked": false
+    },
+    {
+      "id": "13",
+      "destinationId": 5,
+      "name": "Bali Tropical Resort",
+      "address": "Ubud",
+      "stars": 5,
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+      "likes": 22,
+      "liked": false
+    },
+    {
+      "id": "14",
+      "destinationId": 5,
+      "name": "Bali Beach Hotel",
+      "address": "Kuta Beach",
+      "stars": 4,
+      "image": "https://images.unsplash.com/photo-1507525428035-b723cf961d3f",
+      "likes": 18,
+      "liked": false
+    },
+    {
+      "id": "15",
+      "destinationId": 5,
+      "name": "Bali Budget Home",
+      "address": "Denpasar",
+      "stars": 3,
+      "image": "https://images.unsplash.com/photo-1507525428036-b723cf961d40",
+      "likes": 9,
+      "liked": false
+    }
   ],
-
   "rooms": [
-    { "id": 1,  "hotelId": 1,  "type": "Single", "price": 100, "capacity": 1 },
-    { "id": 2,  "hotelId": 1,  "type": "Double", "price": 150, "capacity": 2 },
-
-    { "id": 3,  "hotelId": 2,  "type": "Single", "price": 160, "capacity": 1 },
-    { "id": 4,  "hotelId": 2,  "type": "Double", "price": 220, "capacity": 2 },
-
-    { "id": 5,  "hotelId": 3,  "type": "Single", "price": 80, "capacity": 1 },
-    { "id": 6,  "hotelId": 3,  "type": "Double", "price": 120, "capacity": 2 },
-
-    { "id": 7,  "hotelId": 4,  "type": "Single", "price": 120, "capacity": 1 },
-    { "id": 8,  "hotelId": 4,  "type": "Double", "price": 180, "capacity": 2 },
-
-    { "id": 9,  "hotelId": 5,  "type": "Single", "price": 170, "capacity": 1 },
-    { "id": 10, "hotelId": 5,  "type": "Double", "price": 240, "capacity": 2 },
-
-    { "id": 11,  "hotelId": 6,  "type": "Single", "price": 60,  "capacity": 1 },
-    { "id": 12,  "hotelId": 6,  "type": "Double", "price": 90,  "capacity": 2 },
-
-    { "id": 13,  "hotelId": 7,  "type": "Single", "price": 200, "capacity": 1 },
-    { "id": 14,  "hotelId": 7,  "type": "Double", "price": 300, "capacity": 2 },
-
-    { "id": 15,  "hotelId": 8,  "type": "Single", "price": 140, "capacity": 1 },
-    { "id": 16,  "hotelId": 8,  "type": "Double", "price": 220, "capacity": 2 },
-
-    { "id": 17,  "hotelId": 9,  "type": "Single", "price": 70, "capacity": 1 },
-    { "id": 18,  "hotelId": 9,  "type": "Double", "price": 110, "capacity": 2 },
-
-    { "id": 19,  "hotelId": 10, "type": "Single", "price": 130, "capacity": 1 },
-    { "id": 20,  "hotelId": 10,  "type": "Double", "price": 190, "capacity": 2 },
-
-    { "id": 21,  "hotelId": 11, "type": "Single", "price": 160, "capacity": 1 },
-    { "id": 22,  "hotelId": 11, "type": "Double", "price": 240, "capacity": 2 },
-
-    { "id": 23,  "hotelId": 12, "type": "Single", "price": 90,  "capacity": 1 },
-    { "id": 24,  "hotelId": 12, "type": "Double", "price": 140, "capacity": 2 },
-
-    { "id": 25,  "hotelId": 13, "type": "Single", "price": 180, "capacity": 1 },
-    { "id": 26,  "hotelId": 13, "type": "Double", "price": 260, "capacity": 2 },
-
-    { "id": 27,  "hotelId": 14, "type": "Single", "price": 150, "capacity": 1 },
-    { "id": 28,  "hotelId": 14, "type": "Double", "price": 220, "capacity": 2 },
-
-    { "id": 29,  "hotelId": 15, "type": "Single", "price": 100, "capacity": 1 },
-    { "id": 30,  "hotelId": 15, "type": "Double", "price": 150, "capacity": 2 }
+    {
+      "id": "1",
+      "hotelId": 1,
+      "type": "Single",
+      "price": 100,
+      "capacity": 1
+    },
+    {
+      "id": "2",
+      "hotelId": 1,
+      "type": "Double",
+      "price": 150,
+      "capacity": 2
+    },
+    {
+      "id": "3",
+      "hotelId": 2,
+      "type": "Single",
+      "price": 160,
+      "capacity": 1
+    },
+    {
+      "id": "4",
+      "hotelId": 2,
+      "type": "Double",
+      "price": 220,
+      "capacity": 2
+    },
+    {
+      "id": "5",
+      "hotelId": 3,
+      "type": "Single",
+      "price": 80,
+      "capacity": 1
+    },
+    {
+      "id": "6",
+      "hotelId": 3,
+      "type": "Double",
+      "price": 120,
+      "capacity": 2
+    },
+    {
+      "id": "7",
+      "hotelId": 4,
+      "type": "Single",
+      "price": 120,
+      "capacity": 1
+    },
+    {
+      "id": "8",
+      "hotelId": 4,
+      "type": "Double",
+      "price": 180,
+      "capacity": 2
+    },
+    {
+      "id": "9",
+      "hotelId": 5,
+      "type": "Single",
+      "price": 170,
+      "capacity": 1
+    },
+    {
+      "id": "10",
+      "hotelId": 5,
+      "type": "Double",
+      "price": 240,
+      "capacity": 2
+    },
+    {
+      "id": "11",
+      "hotelId": 6,
+      "type": "Single",
+      "price": 60,
+      "capacity": 1
+    },
+    {
+      "id": "12",
+      "hotelId": 6,
+      "type": "Double",
+      "price": 90,
+      "capacity": 2
+    },
+    {
+      "id": "13",
+      "hotelId": 7,
+      "type": "Single",
+      "price": 200,
+      "capacity": 1
+    },
+    {
+      "id": "14",
+      "hotelId": 7,
+      "type": "Double",
+      "price": 300,
+      "capacity": 2
+    },
+    {
+      "id": "15",
+      "hotelId": 8,
+      "type": "Single",
+      "price": 140,
+      "capacity": 1
+    },
+    {
+      "id": "16",
+      "hotelId": 8,
+      "type": "Double",
+      "price": 220,
+      "capacity": 2
+    },
+    {
+      "id": "17",
+      "hotelId": 9,
+      "type": "Single",
+      "price": 70,
+      "capacity": 1
+    },
+    {
+      "id": "18",
+      "hotelId": 9,
+      "type": "Double",
+      "price": 110,
+      "capacity": 2
+    },
+    {
+      "id": "19",
+      "hotelId": 10,
+      "type": "Single",
+      "price": 130,
+      "capacity": 1
+    },
+    {
+      "id": "20",
+      "hotelId": 10,
+      "type": "Double",
+      "price": 190,
+      "capacity": 2
+    },
+    {
+      "id": "21",
+      "hotelId": 11,
+      "type": "Single",
+      "price": 160,
+      "capacity": 1
+    },
+    {
+      "id": "22",
+      "hotelId": 11,
+      "type": "Double",
+      "price": 240,
+      "capacity": 2
+    },
+    {
+      "id": "23",
+      "hotelId": 12,
+      "type": "Single",
+      "price": 90,
+      "capacity": 1
+    },
+    {
+      "id": "24",
+      "hotelId": 12,
+      "type": "Double",
+      "price": 140,
+      "capacity": 2
+    },
+    {
+      "id": "25",
+      "hotelId": 13,
+      "type": "Single",
+      "price": 180,
+      "capacity": 1
+    },
+    {
+      "id": "26",
+      "hotelId": 13,
+      "type": "Double",
+      "price": 260,
+      "capacity": 2
+    },
+    {
+      "id": "27",
+      "hotelId": 14,
+      "type": "Single",
+      "price": 150,
+      "capacity": 1
+    },
+    {
+      "id": "28",
+      "hotelId": 14,
+      "type": "Double",
+      "price": 220,
+      "capacity": 2
+    },
+    {
+      "id": "29",
+      "hotelId": 15,
+      "type": "Single",
+      "price": 100,
+      "capacity": 1
+    },
+    {
+      "id": "30",
+      "hotelId": 15,
+      "type": "Double",
+      "price": 150,
+      "capacity": 2
+    }
   ],
-
   "bookings": []
 }

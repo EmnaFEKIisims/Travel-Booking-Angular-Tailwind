@@ -1,512 +1,288 @@
-/* Joyful Travel Booking SignIn Styles */
-.signin-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
+/* GetJoy Travel - Complete Interface in Card Design */
+
+/* Main Container - Centers the card */
+.auth-container {
+  @apply min-h-screen flex items-center justify-center p-4;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 30%, #cbd5e1 100%);
 }
 
-.signin-container::before {
+/* Main Card Container - Contains everything */
+.auth-card {
+  @apply w-full max-w-5xl h-[600px] bg-white rounded-3xl shadow-2xl overflow-hidden relative;
+  animation: cardEntrance 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Left Side - Visual Section Inside Card (Switched to left) */
+.auth-visual-section {
+  @apply absolute left-0 top-0 w-1/2 h-full relative overflow-hidden;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%);
+}
+
+.auth-visual-image {
+  @apply w-full h-full object-cover;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+/* Overlay for better text readability on image */
+.auth-visual-section::before {
   content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(120, 219, 226, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 203, 107, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(255, 107, 107, 0.2) 0%, transparent 50%);
-  animation: float 6s ease-in-out infinite;
+  @apply absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-teal-600/40 z-10;
 }
 
-.signin-content {
-  max-width: 440px;
-  width: 100%;
-  position: relative;
-  z-index: 10;
+/* Right Side - Form Section Inside Card (Switched to right) */
+.auth-form-section {
+  @apply absolute right-0 top-0 w-1/2 h-full flex flex-col justify-center px-12 py-8 z-20;
 }
 
-/* Bright Glass Morphism Form */
-.signin-form-container {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 24px;
-  padding: 3rem 2.5rem;
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
+/* Travel Quote Card - Inside the visual section (now on left) */
+.travel-quote {
+  @apply absolute bottom-8 left-8 bg-white/95 backdrop-blur-md rounded-2xl p-6 max-w-xs shadow-xl z-20;
+  animation: quoteFloat 8s ease-in-out infinite;
 }
 
-.signin-form-container::before {
+.travel-quote h4 {
+  @apply text-lg font-bold text-gray-900 mb-2 leading-tight;
+}
+
+.travel-quote p {
+  @apply text-sm text-gray-600 leading-relaxed;
+}
+
+/* Enhanced floating animation */
+@keyframes quoteFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Card Glow Effect */
+.auth-card::before {
   content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, 
-    #FF6B6B, 
-    #4ECDC4, 
-    #45B7D1, 
-    #96CEB4, 
-    #FFEAA7,
-    #FF6B6B
-  );
-  background-size: 400% 100%;
-  animation: rainbow 3s linear infinite;
+  @apply absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 rounded-3xl opacity-10 blur-sm z-0;
+  animation: glowPulse 3s ease-in-out infinite;
 }
 
-@keyframes rainbow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 400% 50%; }
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(1.01); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(1deg); }
+/* Alert Styles - Cyan/Blue Theme */
+.alert {
+  @apply rounded-xl p-4 mb-6 border-l-4 animate-pulse;
+}
+
+.alert-success {
+  @apply bg-cyan-50 border-cyan-400;
+}
+
+.alert-error {
+  @apply bg-cyan-50 border-cyan-500;
+}
+
+.alert-warning {
+  @apply bg-cyan-50 border-cyan-400;
+}
+
+.alert-content {
+  @apply flex items-center gap-3;
+}
+
+.alert-icon {
+  @apply w-5 h-5 flex-shrink-0;
+}
+
+.alert-success .alert-icon {
+  @apply text-cyan-600;
+}
+
+.alert-error .alert-icon {
+  @apply text-cyan-700;
+}
+
+.alert-warning .alert-icon {
+  @apply text-cyan-600;
+}
+
+.alert-message {
+  @apply text-sm font-medium;
+}
+
+.alert-success .alert-message {
+  @apply text-cyan-800;
+}
+
+.alert-error .alert-message {
+  @apply text-cyan-900;
+}
+
+.alert-warning .alert-message {
+  @apply text-cyan-800;
 }
 
 /* Header Styles */
-.signin-header {
-  text-align: center;
-  margin-bottom: 2.5rem;
+.auth-header {
+  @apply mb-6;
 }
 
-.getjoy-logo {
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
-  letter-spacing: -1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.logo-container {
+  @apply flex items-center gap-3 mb-6;
 }
 
-.signin-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #2D3748;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #2D3748, #4A5568);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.logo-icon {
+  @apply w-8 h-8 text-cyan-600;
 }
 
-.signin-subtitle {
-  color: #718096;
-  font-size: 1rem;
-  font-weight: 500;
+.logo-text {
+  @apply text-xl font-bold text-gray-900 tracking-tight;
+}
+
+.logo-tagline {
+  @apply text-xs text-gray-500 font-normal ml-2;
+}
+
+.auth-title {
+  @apply text-2xl font-bold text-gray-900 mb-2 tracking-tight;
+}
+
+.auth-subtitle {
+  @apply text-sm text-gray-600 mb-6;
 }
 
 /* Form Styles */
-.signin-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
 .form-group {
-  position: relative;
+  @apply mb-4;
 }
 
 .form-label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #4A5568;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.8rem;
+  @apply block text-sm font-semibold text-gray-700 mb-2;
 }
 
-/* Joyful Input Styles */
-.input-base {
-  width: 100%;
-  padding: 1.125rem 1.25rem 1.125rem 3.5rem;
-  border: 2px solid #E2E8F0;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.9);
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #2D3748;
+.input-wrapper {
+  @apply relative;
 }
 
-.input-base:focus {
-  outline: none;
-  border-color: #4ECDC4;
-  background: white;
-  box-shadow: 
-    0 0 0 4px rgba(78, 205, 196, 0.15),
-    0 8px 25px rgba(78, 205, 196, 0.2);
-  transform: translateY(-2px);
+.form-input {
+  @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-white text-sm font-normal text-gray-900 transition-all duration-300 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10 placeholder:text-gray-400;
 }
 
-.input-base::placeholder {
-  color: #A0AEC0;
-  font-weight: 400;
-}
-
+/* Input States */
 .input-valid {
-  border-color: #48BB78;
-  background: linear-gradient(to right, rgba(72, 187, 120, 0.05), white);
-}
-
-.input-valid:focus {
-  border-color: #48BB78;
-  box-shadow: 0 0 0 4px rgba(72, 187, 120, 0.15);
+  @apply border-green-500 bg-green-50 !important;
 }
 
 .input-invalid {
-  border-color: #FC8181;
-  background: linear-gradient(to right, rgba(252, 129, 129, 0.05), white);
+  @apply border-red-500 bg-red-50 !important;
 }
 
-.input-invalid:focus {
-  border-color: #FC8181;
-  box-shadow: 0 0 0 4px rgba(252, 129, 129, 0.15);
-}
-
-.input-default {
-  border-color: #E2E8F0;
-}
-
-/* Input Icons */
-.form-group::before {
-  position: absolute;
-  left: 1.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.25rem;
-  z-index: 2;
-  transition: all 0.3s ease;
-}
-
-.form-group:first-child::before {
-  content: '✉️';
-}
-
-.form-group:nth-child(2)::before {
-  content: '🔒';
-}
-
-.input-base:focus + .form-group::before {
-  transform: translateY(-50%) scale(1.1);
-}
-
-/* Error Messages */
 .error-messages {
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  color: #E53E3E;
-  font-weight: 600;
-  padding-left: 0.5rem;
+  @apply mt-2 text-sm text-red-600 font-medium;
 }
 
-/* Joyful Button Styles */
-.submit-button {
-  width: 100%;
-  padding: 1.25rem 2rem;
-  border: none;
-  border-radius: 16px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.submit-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transition: left 0.6s;
-}
-
-.submit-button:hover::before {
-  left: 100%;
+/* Button Styles */
+.auth-button {
+  @apply w-full px-8 py-3 border-none rounded-xl text-base font-semibold transition-all duration-300 relative overflow-hidden flex items-center justify-center gap-2 cursor-pointer mt-4;
 }
 
 .button-enabled {
-  background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
-  color: white;
-  cursor: pointer;
-  box-shadow: 
-    0 8px 25px rgba(255, 107, 107, 0.3),
-    0 4px 12px rgba(78, 205, 196, 0.3);
-}
-
-.button-enabled:hover {
-  transform: translateY(-3px);
-  box-shadow: 
-    0 15px 35px rgba(255, 107, 107, 0.4),
-    0 8px 20px rgba(78, 205, 196, 0.4);
-  background: linear-gradient(135deg, #FF8E8E 0%, #6BDFD6 50%, #5AC5E1 100%);
-}
-
-.button-enabled:active {
-  transform: translateY(-1px);
+  @apply bg-black text-white hover:bg-gray-800 hover:-translate-y-0.5 hover:shadow-lg;
 }
 
 .button-disabled {
-  background: #CBD5E0;
-  color: #718096;
-  cursor: not-allowed;
-  box-shadow: none;
+  @apply bg-gray-200 text-gray-400 cursor-not-allowed;
 }
 
 /* Loading Spinner */
 .loading-spinner {
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 3px solid transparent;
-  border-top: 3px solid white;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+  @apply w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Footer */
+.auth-footer {
+  @apply mt-8 text-center;
 }
 
-/* Joyful Alert Styles */
-.alert {
-  border-radius: 16px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1.5rem;
-  border: 2px solid;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  animation: slideIn 0.5s ease-out;
+.auth-footer-text {
+  @apply text-sm text-gray-600;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.alert::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 6px;
-  height: 100%;
-  border-radius: 8px 0 0 8px;
-}
-
-.alert-success {
-  background: rgba(72, 187, 120, 0.1);
-  border-color: rgba(72, 187, 120, 0.3);
-  color: #22543D;
-}
-
-.alert-success::before {
-  background: #48BB78;
-}
-
-.alert-error {
-  background: rgba(252, 129, 129, 0.1);
-  border-color: rgba(252, 129, 129, 0.3);
-  color: #742A2A;
-}
-
-.alert-error::before {
-  background: #FC8181;
-}
-
-.alert-warning {
-  background: rgba(237, 137, 54, 0.1);
-  border-color: rgba(237, 137, 54, 0.3);
-  color: #744210;
-}
-
-.alert-warning::before {
-  background: #ED8936;
-}
-
-.alert-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.alert-icon {
-  flex-shrink: 0;
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.alert-message p {
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-/* Sign Up Link */
-.signup-link-container {
-  text-align: center;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(226, 232, 240, 0.6);
-}
-
-.signup-text {
-  color: #718096;
-  font-size: 0.95rem;
-  margin: 0;
-  font-weight: 500;
-}
-
-.signup-link {
-  color: #4ECDC4;
-  font-weight: 700;
-  text-decoration: none;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.signup-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #4ECDC4, #45B7D1);
-  transition: width 0.3s ease;
-}
-
-.signup-link:hover {
-  color: #45B7D1;
-}
-
-.signup-link:hover::after {
-  width: 100%;
-}
-
-/* Joyful Travel Decorations */
-.travel-decoration {
-  position: absolute;
-  z-index: 1;
-  font-size: 4rem;
-  animation: floatDecoration 8s ease-in-out infinite;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-}
-
-@keyframes floatDecoration {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg) scale(1); 
-  }
-  25% { 
-    transform: translateY(-15px) rotate(5deg) scale(1.1); 
-  }
-  75% { 
-    transform: translateY(10px) rotate(-5deg) scale(0.9); 
-  }
-}
-
-.deco-1 {
-  top: 10%;
-  left: 5%;
-  animation-delay: 0s;
-}
-
-.deco-2 {
-  bottom: 15%;
-  right: 5%;
-  animation-delay: 2s;
-}
-
-.deco-3 {
-  top: 20%;
-  right: 10%;
-  animation-delay: 4s;
-}
-
-.deco-4 {
-  bottom: 25%;
-  left: 10%;
-  animation-delay: 6s;
-}
-
-/* Floating form animation */
-.signin-form-container {
-  animation: gentleFloat 8s ease-in-out infinite;
-}
-
-@keyframes gentleFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(0.5deg); }
+.auth-link {
+  @apply text-cyan-600 font-semibold no-underline ml-1 transition-colors duration-200 hover:text-cyan-700;
 }
 
 /* Responsive Design */
-@media (max-width: 480px) {
-  .signin-container {
-    padding: 1rem;
+@media (max-width: 1024px) {
+  .auth-card {
+    @apply h-auto min-h-[500px] flex-col;
   }
   
-  .signin-form-container {
-    padding: 2rem 1.5rem;
-    border-radius: 20px;
+  .auth-visual-section {
+    @apply relative w-full h-48 order-first;
   }
   
-  .getjoy-logo {
-    font-size: 2.5rem;
+  .auth-form-section {
+    @apply relative w-full h-auto px-8 py-6 order-last;
   }
   
-  .signin-title {
-    font-size: 1.5rem;
-  }
-  
-  .travel-decoration {
-    font-size: 3rem;
-    opacity: 0.7;
+  .travel-quote {
+    @apply bottom-4 left-4 max-w-xs p-4;
   }
 }
 
-/* Extra joy elements */
-.joy-sparkle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #FFEAA7;
-  border-radius: 50%;
-  animation: sparkle 2s ease-in-out infinite;
-}
+@media (max-width: 640px) {
+  .auth-container {
+    @apply p-2;
+  }
+  
+  .auth-card {
+    @apply max-w-full mx-2 h-auto;
+  }
+  
+  .auth-form-section {
+    @apply px-6 py-4;
+  }
+  
+  .auth-visual-section {
+    @apply h-32;
+  }
+  
+  .logo-text {
+    @apply text-lg;
+  }
+  
+  .auth-title {
+    @apply text-xl;
+  }
+  
+  .travel-quote {
+    @apply hidden;
+  }
 
-@keyframes sparkle {
-  0%, 100% { opacity: 0; transform: scale(0); }
-  50% { opacity: 1; transform: scale(1); }
+  .auth-header {
+    @apply mb-4;
+  }
+
+  .logo-container {
+    @apply mb-4;
+  }
+
+  .form-group {
+    @apply mb-3;
+  }
+
+  .auth-subtitle {
+    @apply mb-4;
+  }
 }

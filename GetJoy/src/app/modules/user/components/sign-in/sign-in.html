@@ -1,51 +1,81 @@
-<div class="signin-container">
-  <!-- Joyful Travel Decorations -->
-  <div class="travel-decoration deco-1">✈️</div>
-  <div class="travel-decoration deco-2">🌴</div>
-  <div class="travel-decoration deco-3">🏝️</div>
-  <div class="travel-decoration deco-4">🗺️</div>
-  
-  <div class="signin-content">
-    <!-- Alert Messages -->
-    <div *ngIf="showAlert" [class]="'alert alert-' + alertType">
-      <div class="alert-content">
-        <div class="alert-icon">
-          <svg *ngIf="alertType === 'success'" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+<div class="auth-container">
+  <!-- Alert Messages - Positioned at top -->
+  <div *ngIf="showAlert" class="alert fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md mx-auto" [ngClass]="'alert-' + alertType">
+    <div class="alert-content">
+      <div class="alert-icon">
+        <!-- Success Icon -->
+        <svg *ngIf="alertType === 'success'" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        <!-- Error Icon -->
+        <svg *ngIf="alertType === 'error'" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+        </svg>
+        <!-- Warning Icon -->
+        <svg *ngIf="alertType === 'warning'" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <p class="alert-message">{{ alertMessage }}</p>
+    </div>
+  </div>
+
+  <!-- Main Card Container -->
+  <div class="auth-card">
+    <!-- Left Side - Visual Section with Image -->
+    <div class="auth-visual-section">
+      <!-- Travel Image -->
+      <img 
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+        alt="Tropical Paradise - Crystal clear waters and palm trees"
+        class="auth-visual-image"
+        (error)="$event.target.style.display='none'"
+      >
+      
+      <!-- Travel Quote Card -->
+      <div class="travel-quote">
+        <h4>
+          <svg class="w-5 h-5 inline mr-2 text-cyan-600" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
           </svg>
-          <svg *ngIf="alertType === 'error'" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-          </svg>
-          <svg *ngIf="alertType === 'warning'" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <div class="alert-message">
-          <p>{{ alertMessage }}</p>
-        </div>
+          Explore the World, Beyond Boundaries!
+        </h4>
+        <p>Discover breathtaking destinations and create unforgettable memories. Start your adventure today!</p>
       </div>
     </div>
 
-    <!-- Joyful Sign In Form -->
-    <div class="signin-form-container">
-      <div class="signin-header">
-        <div class="getjoy-logo">GetJoy</div>
-        <h2 class="signin-title">Adventure Awaits! 🌟</h2>
-        <p class="signin-subtitle">Sign in to unlock amazing travel experiences</p>
+    <!-- Right Side - Form Section -->
+    <div class="auth-form-section">
+      <!-- Header -->
+      <div class="auth-header">
+        <div class="logo-container">
+          <!-- Travel/Airplane Icon -->
+          <svg class="logo-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+          </svg>
+          <div>
+            <h1 class="logo-text">GetJoy</h1>
+            <span class="logo-tagline">Explore More. Experience Life.</span>
+          </div>
+        </div>
+        <h2 class="auth-title">Begin Your Adventure</h2>
+        <p class="auth-subtitle">Sign in to your account to continue your journey</p>
       </div>
 
-      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="signin-form">
+      <!-- Form -->
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
         <!-- Email Field -->
         <div class="form-group">
-          <label for="email" class="form-label">
-            Email Address
-          </label>
-          <input
-            id="email"
-            type="email"
-            formControlName="email"
-            [class]="getInputClass(email)"
-            placeholder="your@email.com">
+          <label for="email" class="form-label">Email Address</label>
+          <div class="input-wrapper">
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              [class]="getInputClass(email)"
+              placeholder="your@email.com"
+              class="form-input">
+          </div>
           <div *ngIf="email?.invalid && email?.touched" class="error-messages">
             <div *ngIf="email?.errors?.['required']">Email is required</div>
             <div *ngIf="email?.errors?.['email']">Please enter a valid email</div>
@@ -54,20 +84,19 @@
 
         <!-- Password Field -->
         <div class="form-group">
-          <label for="password" class="form-label">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            formControlName="password"
-            [class]="getInputClass(password)"
-            placeholder="Enter your password">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-wrapper">
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              [class]="getInputClass(password)"
+              placeholder="Enter your password"
+              class="form-input">
+          </div>
           <div *ngIf="password?.invalid && password?.touched" class="error-messages">
             <div *ngIf="password?.errors?.['required']">Password is required</div>
-            <div *ngIf="password?.errors?.['minlength']">
-              Password must be at least 4 characters
-            </div>
+            <div *ngIf="password?.errors?.['minlength']">Password must be at least 4 characters</div>
           </div>
         </div>
 
@@ -76,18 +105,21 @@
           type="submit"
           [disabled]="isLoading"
           [class]="getButtonClass()"
-          class="submit-button">
+          class="auth-button">
           <span *ngIf="isLoading" class="loading-spinner"></span>
-          {{ isLoading ? 'Signing In...' : 'Start Your Journey 🚀' }}
+          <span *ngIf="!isLoading">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+            </svg>
+          </span>
+          {{ isLoading ? 'Signing In...' : "Let's Start" }}
         </button>
 
         <!-- Sign Up Link -->
-        <div class="signup-link-container">
-          <p class="signup-text">
-            New to GetJoy?
-            <a routerLink="/signup" class="signup-link">
-              Join the Adventure!
-            </a>
+        <div class="auth-footer">
+          <p class="auth-footer-text">
+            Don't have an account?
+            <a routerLink="/signup" class="auth-link">Create one here</a>
           </p>
         </div>
       </form>
