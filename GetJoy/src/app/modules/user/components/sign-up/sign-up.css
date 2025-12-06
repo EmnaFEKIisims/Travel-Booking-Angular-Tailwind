@@ -1,0 +1,289 @@
+/* GetJoy Travel - Complete Interface in Card Design - Sign Up */
+
+/* Main Container - Centers the card */
+.auth-container {
+  @apply min-h-screen flex items-center justify-center p-4;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 30%, #cbd5e1 100%);
+}
+
+/* Main Card Container - Taller for signup fields */
+.auth-card {
+  @apply w-full max-w-5xl h-[700px] bg-white rounded-3xl shadow-2xl overflow-hidden relative;
+  animation: cardEntrance 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Left Side - Visual Section Inside Card */
+.auth-visual-section {
+  @apply absolute left-0 top-0 w-1/2 h-full relative overflow-hidden;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%);
+}
+
+.auth-visual-image {
+  @apply w-full h-full object-cover;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+/* Overlay for better text readability on image */
+.auth-visual-section::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-teal-600/40 z-10;
+}
+
+/* Right Side - Form Section Inside Card */
+.auth-form-section {
+  @apply absolute right-0 top-0 w-1/2 h-full flex flex-col justify-center px-12 py-6 z-20;
+  overflow-y: auto;
+}
+
+/* Travel Quote Card - Inside the visual section */
+.travel-quote {
+  @apply absolute bottom-8 left-8 bg-white/95 backdrop-blur-md rounded-2xl p-6 max-w-xs shadow-xl z-20;
+  animation: quoteFloat 8s ease-in-out infinite;
+}
+
+.travel-quote h4 {
+  @apply text-lg font-bold text-gray-900 mb-2 leading-tight;
+}
+
+.travel-quote p {
+  @apply text-sm text-gray-600 leading-relaxed;
+}
+
+/* Enhanced floating animation */
+@keyframes quoteFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Card Glow Effect */
+.auth-card::before {
+  content: '';
+  @apply absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 rounded-3xl opacity-10 blur-sm z-0;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(1.01); }
+}
+
+/* Alert Styles - Cyan/Blue Theme */
+.alert {
+  @apply rounded-xl p-4 mb-4 border-l-4 animate-pulse;
+}
+
+.alert-success {
+  @apply bg-cyan-50 border-cyan-400;
+}
+
+.alert-error {
+  @apply bg-cyan-50 border-cyan-500;
+}
+
+.alert-warning {
+  @apply bg-cyan-50 border-cyan-400;
+}
+
+.alert-content {
+  @apply flex items-center gap-3;
+}
+
+.alert-icon {
+  @apply w-5 h-5 flex-shrink-0;
+}
+
+.alert-success .alert-icon {
+  @apply text-cyan-600;
+}
+
+.alert-error .alert-icon {
+  @apply text-cyan-700;
+}
+
+.alert-warning .alert-icon {
+  @apply text-cyan-600;
+}
+
+.alert-message {
+  @apply text-sm font-medium;
+}
+
+.alert-success .alert-message {
+  @apply text-cyan-800;
+}
+
+.alert-error .alert-message {
+  @apply text-cyan-900;
+}
+
+.alert-warning .alert-message {
+  @apply text-cyan-800;
+}
+
+/* Header Styles - Compact for signup */
+.auth-header {
+  @apply mb-4;
+}
+
+.logo-container {
+  @apply flex items-center gap-3 mb-4;
+}
+
+.logo-icon {
+  @apply w-8 h-8 text-cyan-600;
+}
+
+.logo-text {
+  @apply text-xl font-bold text-gray-900 tracking-tight;
+}
+
+.logo-tagline {
+  @apply text-xs text-gray-500 font-normal ml-2;
+}
+
+.auth-title {
+  @apply text-2xl font-bold text-gray-900 mb-2 tracking-tight;
+}
+
+.auth-subtitle {
+  @apply text-sm text-gray-600 mb-4;
+}
+
+/* Form Styles - Compact for more fields */
+.form-group {
+  @apply mb-3;
+}
+
+.form-label {
+  @apply block text-sm font-semibold text-gray-700 mb-2;
+}
+
+.input-wrapper {
+  @apply relative;
+}
+
+.form-input {
+  @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-white text-sm font-normal text-gray-900 transition-all duration-300 focus:outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10 placeholder:text-gray-400;
+}
+
+/* Input States */
+.input-valid {
+  @apply border-green-500 bg-green-50 !important;
+}
+
+.input-invalid {
+  @apply border-red-500 bg-red-50 !important;
+}
+
+.error-messages {
+  @apply mt-2 text-sm text-red-600 font-medium;
+}
+
+/* Button Styles */
+.auth-button {
+  @apply w-full px-8 py-3 border-none rounded-xl text-base font-semibold transition-all duration-300 relative overflow-hidden flex items-center justify-center gap-2 cursor-pointer mt-4;
+}
+
+.button-enabled {
+  @apply bg-black text-white hover:bg-gray-800 hover:-translate-y-0.5 hover:shadow-lg;
+}
+
+.button-disabled {
+  @apply bg-gray-200 text-gray-400 cursor-not-allowed;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  @apply w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin;
+}
+
+/* Footer */
+.auth-footer {
+  @apply mt-6 text-center;
+}
+
+.auth-footer-text {
+  @apply text-sm text-gray-600;
+}
+
+.auth-link {
+  @apply text-cyan-600 font-semibold no-underline ml-1 transition-colors duration-200 hover:text-cyan-700;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .auth-card {
+    @apply h-auto min-h-[600px] flex-col;
+  }
+  
+  .auth-visual-section {
+    @apply relative w-full h-48 order-first;
+  }
+  
+  .auth-form-section {
+    @apply relative w-full h-auto px-8 py-6 order-last overflow-visible;
+  }
+  
+  .travel-quote {
+    @apply bottom-4 left-4 max-w-xs p-4;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-container {
+    @apply p-2;
+  }
+  
+  .auth-card {
+    @apply max-w-full mx-2 h-auto;
+  }
+  
+  .auth-form-section {
+    @apply px-6 py-4;
+  }
+  
+  .auth-visual-section {
+    @apply h-32;
+  }
+  
+  .logo-text {
+    @apply text-lg;
+  }
+  
+  .auth-title {
+    @apply text-xl;
+  }
+  
+  .travel-quote {
+    @apply hidden;
+  }
+
+  .auth-header {
+    @apply mb-3;
+  }
+
+  .logo-container {
+    @apply mb-3;
+  }
+
+  .form-group {
+    @apply mb-2;
+  }
+
+  .auth-subtitle {
+    @apply mb-3;
+  }
+}
