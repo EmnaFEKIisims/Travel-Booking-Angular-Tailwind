@@ -50,6 +50,10 @@ export class Feed implements OnInit {
   loadCurrentUser() {
     this.userService.currentUser$.subscribe(user => {
       this.currentUser = user;
+      // Reload destinations when user changes to update liked status
+      if (this.destinations.length > 0) {
+        this.loadUserLikes();
+      }
     });
   }
 
@@ -63,6 +67,11 @@ export class Feed implements OnInit {
           isLiked: false
         }));
         this.loading = false;
+        
+        // Load user likes if user is logged in
+        if (this.currentUser) {
+          this.loadUserLikes();
+        }
       },
       error: (error) => {
         console.error('Failed to load destinations:', error);
@@ -71,20 +80,39 @@ export class Feed implements OnInit {
     });
   }
 
+  loadUserLikes() {
+    if (!this.currentUser) return;
+    
+    this.userService.getUserLikes(this.currentUser.id).subscribe({
+      next: (likes) => {
+        // Update isLiked status for each destination
+        this.destinations.forEach(destination => {
+          destination.isLiked = likes.some(like => like.destinationId === destination.id);
+        });
+      },
+      error: (error) => {
+        console.error('Failed to load user likes:', error);
+      }
+    });
+  }
+
   toggleLike(destination: Destination) {
     if (!this.currentUser) {
-      // Redirect to login if not authenticated
+      // TODO: Redirect to login if not authenticated
+      console.log('User not logged in');
       return;
     }
 
     const wasLiked = destination.isLiked;
+    // Optimistic update
     destination.isLiked = !destination.isLiked;
     
     if (destination.isLiked) {
+      // Like the destination
       this.userService.likeDestination(this.currentUser.id, destination.id).subscribe({
         next: (updatedDestination) => {
           console.log('Destination liked successfully');
-          // Update local likes count
+          // Update local likes count from server response
           destination.likes = updatedDestination.likes;
         },
         error: (error: any) => {
@@ -93,10 +121,11 @@ export class Feed implements OnInit {
         }
       });
     } else {
+      // Unlike the destination
       this.userService.unlikeDestination(this.currentUser.id, destination.id).subscribe({
         next: (updatedDestination) => {
           console.log('Destination unliked successfully');
-          // Update local likes count
+          // Update local likes count from server response
           destination.likes = updatedDestination.likes;
         },
         error: (error: any) => {
