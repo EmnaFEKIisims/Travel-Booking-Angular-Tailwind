@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
 export interface Destination {
   id: number;
@@ -11,10 +11,29 @@ export interface Destination {
   image?: string; // Legacy field
   location?: string;
   country?: string; // Legacy field
-  price?: number;
   rating?: number;
   likes?: number;
   liked?: boolean;
+}
+
+export interface Hotel {
+  id: string;
+  destinationId: number;
+  name: string;
+  address: string;
+  stars: number;
+  image: string;
+  likes: number;
+  liked: boolean;
+  rooms?: Room[]; // Add rooms to hotel interface
+}
+
+export interface Room {
+  id: string;
+  hotelId: string;
+  type: string;
+  price: number;
+  capacity: number;
 }
 
 @Injectable({
@@ -22,6 +41,8 @@ export interface Destination {
 })
 export class DestinationService {
   private apiUrl = 'http://localhost:3000/destinations';
+  private hotelsUrl = 'http://localhost:3000/hotels';
+  private roomsUrl = 'http://localhost:3000/rooms';
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +51,39 @@ export class DestinationService {
   }
 
   getDestinationById(id: number): Observable<Destination> {
-    return this.http.get<Destination>(`${this.apiUrl}/${id}`);
+    return this.http.get<Destination[]>(this.apiUrl).pipe(
+      map((destinations: Destination[]) => {
+        const destination = destinations.find((dest: Destination) => dest.id === id);
+        if (!destination) {
+          throw new Error(`Destination with id ${id} not found`);
+        }
+        return destination;
+      })
+    );
+  }
+
+  getHotelsByDestination(destinationId: number): Observable<Hotel[]> {
+    return this.http.get<Hotel[]>(`${this.hotelsUrl}?destinationId=${destinationId}`);
+  }
+
+  getRoomsByHotel(hotelId: string): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.roomsUrl}?hotelId=${hotelId}`);
+  }
+
+  getHotelsWithRooms(destinationId: number): Observable<Hotel[]> {
+    return this.getHotelsByDestination(destinationId).pipe(
+      switchMap(hotels => {
+        if (hotels.length === 0) {
+          return forkJoin([]).pipe(map(() => []));
+        }
+        const hotelObservables = hotels.map(hotel =>
+          this.getRoomsByHotel(hotel.id).pipe(
+            map(rooms => ({ ...hotel, rooms }))
+          )
+        );
+        return forkJoin(hotelObservables);
+      })
+    );
   }
 
   updateDestinationLikes(destinationId: number, increment: boolean): Observable<Destination> {

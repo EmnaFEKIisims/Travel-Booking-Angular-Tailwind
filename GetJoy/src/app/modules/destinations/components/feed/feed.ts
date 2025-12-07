@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DestinationService } from '../../destination-service';
 import { UserService } from '../../../user/user-service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 interface Destination {
   id: number;
@@ -12,7 +12,6 @@ interface Destination {
   image?: string; // Legacy field
   location?: string;
   country?: string; // Legacy field
-  price?: number;
   rating?: number;
   likes?: number;
   liked?: boolean;
@@ -39,7 +38,8 @@ export class Feed implements OnInit {
 
   constructor(
     private destinationService: DestinationService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -138,7 +138,8 @@ export class Feed implements OnInit {
 
   viewDestination(destinationId: number) {
     // Navigate to destination details
-    console.log('View destination:', destinationId);
+    console.log('Navigating to destination details for ID:', destinationId);
+    this.router.navigate(['/destination', destinationId]);
   }
 
   getStarArray(rating: number): boolean[] {

@@ -103,15 +103,6 @@
   @apply text-red-400;
 }
 
-/* Price Badge */
-.price-badge {
-  @apply absolute bottom-4 left-4 bg-cyan-600 text-white px-4 py-2 rounded-full shadow-lg;
-}
-
-.price-text {
-  @apply font-semibold text-sm;
-}
-
 /* Card Content */
 .card-content {
   @apply p-6 flex-1 flex flex-col;
@@ -264,10 +255,6 @@
   .heart-icon {
     @apply w-5 h-5;
   }
-  
-  .price-badge {
-    @apply bottom-3 left-3 px-3 py-1;
-  }
 }
 
 /* Hover Effects for Cards */
@@ -297,6 +284,6 @@
   @apply absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 pointer-events-none;
 }
 
-.like-button, .price-badge {
+.like-button {
   z-index: 20;
 }
