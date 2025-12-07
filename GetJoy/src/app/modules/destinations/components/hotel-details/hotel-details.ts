@@ -21,6 +21,8 @@ export class HotelDetails implements OnInit {
   checkInDate: string = '';
   checkOutDate: string = '';
   guests: number = 1;
+  hotelId: string = '';
+  destinationId: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -33,9 +35,9 @@ export class HotelDetails implements OnInit {
   ngOnInit() {
     this.loadCurrentUser();
     this.route.params.subscribe(params => {
-      const hotelId = params['id'];
-      this.loadHotelDetails(hotelId);
-      this.loadRooms(hotelId);
+      this.hotelId = params['id'];
+      this.loadHotelDetails(this.hotelId);
+      this.loadRooms(this.hotelId);
     });
     
     // Set default dates (today and tomorrow)
@@ -66,6 +68,7 @@ export class HotelDetails implements OnInit {
               const hotel = hotels.find(h => h.id === hotelId);
               if (hotel && !foundHotel) {
                 this.hotel = hotel;
+                this.destinationId = destination.id.toString(); // Set the destination ID
                 foundHotel = true;
               }
               destinationsProcessed++;
@@ -119,18 +122,19 @@ export class HotelDetails implements OnInit {
   bookNow() {
     if (!this.selectedRoom || !this.currentUser) {
       if (!this.currentUser) {
-        this.router.navigate(['/sign-in']);
+        this.router.navigate(['/signin']);
       }
       return;
     }
     
-    // TODO: Implement actual booking logic
-    console.log('Booking room:', this.selectedRoom);
-    console.log('Check-in:', this.checkInDate);
-    console.log('Check-out:', this.checkOutDate);
-    console.log('Guests:', this.guests);
-    
-    alert('Booking successful! (Demo)');
+    // Navigate to add-booking form with the necessary parameters
+    this.router.navigate(['/add-booking'], {
+      queryParams: {
+        hotelId: this.hotelId,
+        destinationId: this.destinationId,
+        roomId: this.selectedRoom.id
+      }
+    });
   }
 
   goBack() {

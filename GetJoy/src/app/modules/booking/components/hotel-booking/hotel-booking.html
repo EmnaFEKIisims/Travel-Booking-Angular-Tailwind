@@ -1,24 +1,3 @@
-<!-- Alert Messages - Positioned at top -->
-<div *ngIf="showAlert" class="alert fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md mx-auto" [ngClass]="'alert-' + alertType">
-  <div class="alert-content">
-    <div class="alert-icon">
-      <!-- Success Icon -->
-      <svg *ngIf="alertType === 'success'" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-      </svg>
-      <!-- Error Icon -->
-      <svg *ngIf="alertType === 'error'" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-      </svg>
-      <!-- Warning Icon -->
-      <svg *ngIf="alertType === 'warning'" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-      </svg>
-    </div>
-    <p class="alert-message">{{ alertMessage }}</p>
-  </div>
-</div>
-
 <!-- Loading State -->
 <div *ngIf="!hotel || !destination" class="min-h-screen bg-gray-50 flex items-center justify-center">
   <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
@@ -113,7 +92,7 @@
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="">Please Select</option>
-                <option *ngFor="let room of hotel?.rooms" [value]="room.type">
+                <option *ngFor="let room of hotel.rooms" [value]="room.type">
                   {{ room.type }} Room - {{ room.price }} TND/night
                 </option>
               </select>
@@ -123,26 +102,26 @@
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Number of Guests</label>
-                <input 
-                  type="number"
+                <select 
                   formControlName="numberOfGuests"
-                  min="1"
-                  max="10"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter number of guests"
                 >
+                  <option *ngFor="let i of [].constructor(10); let idx = index" [value]="idx + 1">
+                    {{ idx + 1 }} {{ (idx + 1) === 1 ? 'Guest' : 'Guests' }}
+                  </option>
+                </select>
               </div>
               
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Number of Rooms</label>
-                <input 
-                  type="number"
+                <select 
                   formControlName="numberOfRooms"
-                  min="1"
-                  max="5"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter number of rooms"
                 >
+                  <option *ngFor="let i of [].constructor(5); let idx = index" [value]="idx + 1">
+                    {{ idx + 1 }} {{ (idx + 1) === 1 ? 'Room' : 'Rooms' }}
+                  </option>
+                </select>
               </div>
             </div>
           </div>
@@ -205,7 +184,7 @@
                 class="w-5 h-5 text-blue-600 border-2 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
               >
               <span class="text-gray-700 font-medium">Include Flight Ticket</span>
-              <span class="text-sm text-gray-500">({{ destination?.flightPrice || 0 }} TND per person, one way)</span>
+              <span class="text-sm text-gray-500">({{ destination.flightPrice }} TND per person, one way)</span>
             </label>
           </div>
 
@@ -221,7 +200,7 @@
                 >
                 <div>
                   <div class="font-medium text-gray-800">One Way</div>
-                  <div class="text-sm text-gray-500">{{ (destination?.flightPrice || 0) * (bookingForm.get('numberOfGuests')?.value || 1) }} TND total</div>
+                  <div class="text-sm text-gray-500">{{ destination.flightPrice * bookingForm.get('numberOfGuests')?.value }} TND total</div>
                 </div>
               </label>
               
@@ -234,7 +213,7 @@
                 >
                 <div>
                   <div class="font-medium text-gray-800">Round Trip</div>
-                  <div class="text-sm text-gray-500">{{ (destination?.flightPrice || 0) * 2 * (bookingForm.get('numberOfGuests')?.value || 1) }} TND total</div>
+                  <div class="text-sm text-gray-500">{{ destination.flightPrice * 2 * bookingForm.get('numberOfGuests')?.value }} TND total</div>
                 </div>
               </label>
             </div>

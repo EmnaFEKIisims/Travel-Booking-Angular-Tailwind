@@ -116,4 +116,21 @@ export class DestinationService {
       })
     );
   }
+
+  getHotelById(hotelId: string): Observable<Hotel> {
+    return this.http.get<Hotel[]>(this.hotelsUrl).pipe(
+      map(hotels => {
+        const hotel = hotels.find(h => h.id === hotelId);
+        if (!hotel) {
+          throw new Error(`Hotel with id ${hotelId} not found`);
+        }
+        return hotel;
+      }),
+      switchMap(hotel => 
+        this.getRoomsByHotel(hotel.id).pipe(
+          map(rooms => ({ ...hotel, rooms }))
+        )
+      )
+    );
+  }
 }

@@ -1,58 +1,5 @@
 /* Additional custom styling for the booking form */
 
-/* Alert Styles - Cyan/Blue Theme */
-.alert {
-  @apply rounded-xl p-4 mb-6 border-l-4 animate-pulse mx-auto max-w-md;
-}
-
-.alert-success {
-  @apply bg-cyan-50 border-cyan-400;
-}
-
-.alert-error {
-  @apply bg-cyan-50 border-cyan-500;
-}
-
-.alert-warning {
-  @apply bg-cyan-50 border-cyan-400;
-}
-
-.alert-content {
-  @apply flex items-center gap-3;
-}
-
-.alert-icon {
-  @apply w-5 h-5 flex-shrink-0;
-}
-
-.alert-success .alert-icon {
-  @apply text-cyan-600;
-}
-
-.alert-error .alert-icon {
-  @apply text-cyan-700;
-}
-
-.alert-warning .alert-icon {
-  @apply text-cyan-600;
-}
-
-.alert-message {
-  @apply text-sm font-medium;
-}
-
-.alert-success .alert-message {
-  @apply text-cyan-800;
-}
-
-.alert-error .alert-message {
-  @apply text-cyan-900;
-}
-
-.alert-warning .alert-message {
-  @apply text-cyan-800;
-}
-
 .form-container {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }

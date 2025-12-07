@@ -36,7 +36,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.8,
       "likes": 45,
-      "liked": false
+      "liked": false,
+      "flightPrice": 850
     },
     {
       "id": 2,
@@ -48,7 +49,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.9,
       "likes": 32,
-      "liked": false
+      "liked": false,
+      "flightPrice": 1200
     },
     {
       "id": 3,
@@ -60,7 +62,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.7,
       "likes": 28,
-      "liked": false
+      "liked": false,
+      "flightPrice": 950
     },
     {
       "id": 4,
@@ -72,7 +75,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.6,
       "likes": 38,
-      "liked": false
+      "liked": false,
+      "flightPrice": 1350
     },
     {
       "id": 5,
@@ -84,7 +88,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.8,
       "likes": 41,
-      "liked": false
+      "liked": false,
+      "flightPrice": 750
     },
     {
       "id": 6,
@@ -96,7 +101,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.7,
       "likes": 52,
-      "liked": false
+      "liked": false,
+      "flightPrice": 900
     },
     {
       "id": 7,
@@ -108,7 +114,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.9,
       "likes": 67,
-      "liked": false
+      "liked": false,
+      "flightPrice": 650
     },
     {
       "id": 8,
@@ -120,7 +127,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.8,
       "likes": 73,
-      "liked": false
+      "liked": false,
+      "flightPrice": 500
     },
     {
       "id": 9,
@@ -132,7 +140,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.9,
       "likes": 89,
-      "liked": false
+      "liked": false,
+      "flightPrice": 1500
     }
   ],
   "hotels": [
@@ -787,7 +796,60 @@
       "capacity": 2
     }
   ],
-  "bookings": [],
+  "bookings": [
+    {
+      "id": "BK1765147310020373",
+      "firstName": "Emna",
+      "lastName": "Feki",
+      "email": "emna@gmail.com",
+      "roomType": "Double",
+      "numberOfGuests": 2,
+      "numberOfRooms": 1,
+      "arrivalDate": "2025-12-24",
+      "arrivalTime": "12:00",
+      "departureDate": "2025-12-27",
+      "includeFlight": true,
+      "flightType": "roundTrip",
+      "freePickup": true,
+      "specialRequests": "",
+      "userId": "1",
+      "hotelId": "2",
+      "destinationId": "1",
+      "hotelName": "Aegean Sea Resort",
+      "destinationName": "Santorini Island",
+      "roomTotal": 580,
+      "flightTotal": 3400,
+      "totalPrice": 3980,
+      "bookingDate": "2025-12-07T22:41:50.021Z",
+      "status": "confirmed"
+    },
+    {
+      "id": "BK1765147713611679",
+      "firstName": "Emna",
+      "lastName": "Feki",
+      "email": "emna@gmail.com",
+      "roomType": "Double",
+      "numberOfGuests": 2,
+      "numberOfRooms": 1,
+      "arrivalDate": "2025-12-28",
+      "arrivalTime": "15:00",
+      "departureDate": "2025-12-30",
+      "includeFlight": true,
+      "flightType": "roundTrip",
+      "freePickup": true,
+      "specialRequests": "",
+      "userId": "1",
+      "hotelId": "22",
+      "destinationId": "8",
+      "hotelName": "Le Meurice",
+      "destinationName": "Paris Romance",
+      "roomTotal": 1420,
+      "flightTotal": 2000,
+      "totalPrice": 3420,
+      "bookingDate": "2025-12-07T22:48:33.611Z",
+      "status": "confirmed"
+    }
+  ],
   "likes": [
     {
       "id": "a5e9",
