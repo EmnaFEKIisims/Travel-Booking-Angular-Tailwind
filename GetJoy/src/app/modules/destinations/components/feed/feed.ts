@@ -142,6 +142,30 @@ export class Feed implements OnInit {
     this.router.navigate(['/destination', destinationId]);
   }
 
+  navigateToSignIn() {
+    this.router.navigate(['/signin']);
+  }
+
+  navigateToSignUp() {
+    this.router.navigate(['/signup']);
+  }
+
+  navigateToExplore() {
+    // Navigate to favorites/liked destinations
+    this.router.navigate(['/liked']);
+  }
+
+  handleExploreMore(destinationId: number) {
+    if (this.currentUser) {
+      // User is logged in, allow navigation to destination details
+      this.viewDestination(destinationId);
+    } else {
+      // User not logged in, redirect to sign-in
+      console.log('User not logged in, redirecting to sign-in');
+      this.navigateToSignIn();
+    }
+  }
+
   getStarArray(rating: number): boolean[] {
     return Array(5).fill(false).map((_, index) => index < Math.floor(rating));
   }

@@ -1,5 +1,75 @@
 /* GetJoy Feed - Travel Agency Inspired Design */
 
+/* Navigation Header */
+.nav-header {
+  @apply bg-white shadow-sm border-b border-gray-100 mb-8;
+}
+
+.nav-content {
+  @apply max-w-6xl mx-auto px-4 py-4 flex items-center justify-between;
+}
+
+.nav-brand {
+  @apply flex items-center gap-3;
+}
+
+.brand-icon {
+  @apply w-8 h-8 text-cyan-600;
+}
+
+.brand-text {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+.nav-actions {
+  @apply flex items-center gap-4;
+}
+
+.nav-button {
+  @apply px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2;
+}
+
+.signin-btn {
+  @apply text-gray-700 border border-gray-300 hover:bg-gray-50;
+}
+
+.signup-btn {
+  @apply text-white bg-cyan-600 hover:bg-cyan-700;
+}
+
+.explore-btn {
+  @apply text-cyan-700 bg-cyan-50 border border-cyan-200 hover:bg-cyan-100;
+}
+
+.btn-icon {
+  @apply w-4 h-4;
+}
+
+.user-welcome {
+  @apply text-gray-700 font-medium;
+}
+
+/* Auth Call to Action */
+.auth-cta {
+  @apply mt-8 p-6 bg-white rounded-xl shadow-lg border border-gray-100;
+}
+
+.cta-text {
+  @apply text-gray-600 mb-6 text-lg;
+}
+
+.cta-buttons {
+  @apply flex gap-4 justify-center flex-wrap;
+}
+
+.cta-primary {
+  @apply px-8 py-3 bg-cyan-600 text-white rounded-lg font-semibold hover:bg-cyan-700 transition-all duration-200;
+}
+
+.cta-secondary {
+  @apply px-8 py-3 border border-cyan-600 text-cyan-600 rounded-lg font-semibold hover:bg-cyan-50 transition-all duration-200;
+}
+
 /* Main Container */
 .feed-container {
   @apply min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50;
