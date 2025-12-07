@@ -274,10 +274,10 @@ export class DestinationDetails implements OnInit {
     const maxPrice = Math.max(...prices);
     
     if (minPrice === maxPrice) {
-      return `€${minPrice}/night`;
+      return `${minPrice} TND/night`;
     }
     
-    return `€${minPrice} - €${maxPrice}/night`;
+    return `${minPrice} - ${maxPrice} TND/night`;
   }
 
   trackByHotel(index: number, hotel: Hotel): string | number {
