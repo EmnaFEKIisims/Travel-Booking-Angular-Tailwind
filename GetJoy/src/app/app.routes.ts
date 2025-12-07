@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
-import { NoAuthGuard } from './guards/no-auth.guard';
+import { AuthGuard } from './modules/guards/auth.guard';
+import { NoAuthGuard } from './modules/guards/no-auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/destination', pathMatch: 'full' },
@@ -21,6 +21,11 @@ export const routes: Routes = [
   { 
     path: 'destination/:id', 
     loadComponent: () => import('./modules/destinations/components/destination-details/destination-details').then(m => m.DestinationDetails)
+  },
+  { 
+    path: 'hotel/:id', 
+    loadComponent: () => import('./modules/destinations/components/hotel-details/hotel-details').then(m => m.HotelDetails),
+    canActivate: [AuthGuard]
   },
   // Protected routes that require authentication
   { 

@@ -51,12 +51,29 @@ export class DestinationService {
   }
 
   getDestinationById(id: number): Observable<Destination> {
+    console.log('Getting destination by ID:', id);
     return this.http.get<Destination[]>(this.apiUrl).pipe(
       map((destinations: Destination[]) => {
-        const destination = destinations.find((dest: Destination) => dest.id === id);
+        console.log('All destinations from API:', destinations);
+        console.log('Destinations length:', destinations?.length);
+        console.log('Looking for destination with ID:', id, 'Type:', typeof id);
+        
+        // Check if destinations is actually an array
+        if (!Array.isArray(destinations)) {
+          console.error('Destinations is not an array:', typeof destinations, destinations);
+          throw new Error('Invalid destinations data received from API');
+        }
+        
+        const destination = destinations.find((dest: Destination) => {
+          console.log('Checking destination:', dest.id, 'vs', id);
+          return Number(dest.id) === Number(id); // Ensure type matching
+        });
+        
         if (!destination) {
+          console.error('Available destination IDs:', destinations.map(d => d.id));
           throw new Error(`Destination with id ${id} not found`);
         }
+        console.log('Found destination:', destination);
         return destination;
       })
     );

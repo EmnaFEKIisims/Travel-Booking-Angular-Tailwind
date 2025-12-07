@@ -1,0 +1,220 @@
+<div class="hotel-details-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-section">
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p class="loading-text">Loading hotel details...</p>
+    </div>
+  </div>
+
+  <!-- Hotel Details Content -->
+  <div *ngIf="!loading && hotel" class="hotel-content">
+    <!-- Hotel Header -->
+    <div class="hotel-header">
+      <button class="back-btn" (click)="goBack()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h1 class="hotel-title">{{ hotel.name }}</h1>
+      <div class="hotel-location">
+        <svg class="location-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+        </svg>
+        {{ hotel.address }}
+      </div>
+      <div class="hotel-rating">
+        <div class="stars">
+          <svg *ngFor="let i of getStarArray(hotel.stars)" class="star" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+        </div>
+        <span class="rating-text">{{ hotel.stars }} Star Rating</span>
+      </div>
+      
+      <!-- Book Now Button in Header -->
+      <div class="header-book-section">
+        <div class="price-display" *ngIf="selectedRoom">
+          <span class="price-label">Starting from</span>
+          <span class="price-value">{{ selectedRoom.price }} TND/night</span>
+        </div>
+        <button class="book-now-btn" (click)="bookNow()">
+          <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+          Book Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="main-layout">
+      <!-- Left Side - Images and Info -->
+      <div class="left-section">
+        <!-- Hotel Image Gallery -->
+        <div class="image-gallery">
+          <div class="main-image">
+            <img [src]="hotel.image" [alt]="hotel.name" (error)="onImageError($event)">
+          </div>
+          <div class="thumbnail-gallery">
+            <img [src]="hotel.image" [alt]="hotel.name" class="thumbnail active">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Hotel view 2" class="thumbnail">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Hotel view 3" class="thumbnail">
+          </div>
+        </div>
+
+        <!-- Hotel Map Section -->
+        <div class="map-section">
+          <h3>Hotel Location</h3>
+          <div class="map-container">
+            <iframe 
+              [src]="getMapUrl(hotel.address)" 
+              width="100%" 
+              height="300" 
+              style="border:0; border-radius: 12px;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <div class="address-info">
+            <svg class="location-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+            </svg>
+            <span>{{ hotel.address }}</span>
+          </div>
+        </div>
+
+        <!-- Room Selection -->
+        <div class="room-selection">
+          <h2>Standard Rooms</h2>
+          <div class="room-tabs">
+            <button 
+              *ngFor="let room of rooms" 
+              class="room-tab"
+              [class.active]="selectedRoom?.id === room.id"
+              (click)="selectRoom(room)">
+              {{ room.type }} Room
+            </button>
+          </div>
+          
+          <div *ngIf="selectedRoom" class="room-details">
+            <div class="room-info">
+              <h3>{{ selectedRoom.type }} Room</h3>
+              <p class="room-capacity">Capacity: {{ selectedRoom.capacity }} {{ selectedRoom.capacity === 1 ? 'person' : 'people' }}</p>
+              <div class="room-price">
+                <span class="price">{{ selectedRoom.price }} TND</span>
+                <span class="per-night">/night</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="overview-section">
+          <h3>Overview</h3>
+          <p>Experience luxury and comfort at {{ hotel.name }}. Located in {{ hotel.address }}, this {{ hotel.stars }}-star hotel offers exceptional service and amenities for an unforgettable stay. Whether you're here for business or leisure, our premium accommodations and world-class facilities will exceed your expectations.</p>
+        </div>
+
+        <!-- Room Amenities -->
+        <div class="amenities-section">
+          <h3>Room Amenities</h3>
+          <div class="amenities-grid">
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+              </svg>
+              Air Conditioning
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/>
+                <path d="M3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6z"/>
+              </svg>
+              Free Wi-Fi
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              High Speed TV
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/>
+              </svg>
+              Mini Fridge
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/>
+              </svg>
+              Safe
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/>
+              </svg>
+              Room Service
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Private Bath
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/>
+              </svg>
+              Working Area
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5z"/>
+              </svg>
+              Sitting Area
+            </div>
+            <div class="amenity-item">
+              <svg class="amenity-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/>
+              </svg>
+              Work Desk
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Rules -->
+        <div class="booking-rules">
+          <h3>Booking Rules</h3>
+          <div class="rules-list">
+            <div class="rule-item check-in">
+              <div class="rule-dot"></div>
+              <span>Check In: 14:00 and older</span>
+            </div>
+            <div class="rule-item check-out">
+              <div class="rule-dot"></div>
+              <span>Check Out: 12:00 and before</span>
+            </div>
+            <div class="rule-item pets">
+              <div class="rule-dot"></div>
+              <span>Pets not allowed</span>
+            </div>
+            <div class="rule-item smoking">
+              <div class="rule-dot"></div>
+              <span>No smoking allowed</span>
+            </div>
+            <div class="rule-item parties">
+              <div class="rule-dot"></div>
+              <span>No parties allowed</span>
+            </div>
+            <div class="rule-item age">
+              <div class="rule-dot"></div>
+              <span>Minimum age 18 years</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
