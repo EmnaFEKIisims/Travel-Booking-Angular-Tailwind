@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable , throwError } from 'rxjs';
-import { tap , switchMap} from 'rxjs/operators';
+import { tap , switchMap, map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -149,6 +149,13 @@ export class UserService {
 
   getUserLikes(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.likesUrl}?userId=${userId}`);
+  }
+
+  // Check if user has liked a specific destination
+  isDestinationLiked(userId: number, destinationId: number): Observable<boolean> {
+    return this.http.get<any[]>(`${this.likesUrl}?userId=${userId}&destinationId=${destinationId}`).pipe(
+      map(likes => likes.length > 0)
+    );
   }
 
   

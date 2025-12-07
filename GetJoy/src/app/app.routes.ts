@@ -14,5 +14,9 @@ export const routes: Routes = [
     path: 'destination', 
     loadComponent: () => import('./modules/destinations/components/feed/feed').then(m => m.Feed)
   },
+  { 
+    path: 'destination/:id', 
+    loadComponent: () => import('./modules/destinations/components/destination-details/destination-details').then(m => m.DestinationDetails)
+  },
   { path: '**', redirectTo: '/destination' }
 ];
