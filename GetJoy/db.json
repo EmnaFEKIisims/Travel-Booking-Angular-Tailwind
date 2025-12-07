@@ -41,7 +41,7 @@
     {
       "id": 2,
       "name": "Bali Paradise",
-      "country": "Indonesia", 
+      "country": "Indonesia",
       "location": "Indonesia",
       "description": "Discover tropical paradise with crystal clear waters, lush rice terraces, and ancient temples.",
       "image": "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
@@ -54,7 +54,7 @@
       "id": 3,
       "name": "Swiss Alps Adventure",
       "country": "Switzerland",
-      "location": "Switzerland", 
+      "location": "Switzerland",
       "description": "Journey through majestic mountain peaks, pristine lakes, and charming alpine villages.",
       "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",

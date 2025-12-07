@@ -1,5 +1,44 @@
 <!-- Feed Container -->
 <div class="feed-container">
+  <!-- Navigation Header -->
+  <div class="nav-header">
+    <div class="nav-content">
+      <div class="nav-brand">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 2L3 7v11a1 1 0 001 1h3v-7h6v7h3a1 1 0 001-1V7l-7-5z"/>
+        </svg>
+        <span class="brand-text">GetJoy</span>
+      </div>
+      
+      <div class="nav-actions">
+        <button 
+          *ngIf="!currentUser" 
+          class="nav-button signin-btn"
+          (click)="navigateToSignIn()">
+          Sign In
+        </button>
+        <button 
+          *ngIf="!currentUser" 
+          class="nav-button signup-btn"
+          (click)="navigateToSignUp()">
+          Sign Up
+        </button>
+        <button 
+          *ngIf="currentUser" 
+          class="nav-button explore-btn"
+          (click)="navigateToExplore()">
+          <svg class="btn-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+          </svg>
+          My Favorites
+        </button>
+        <span *ngIf="currentUser" class="user-welcome">
+          Welcome, {{ currentUser.fullName }}!
+        </span>
+      </div>
+    </div>
+  </div>
+
   <!-- Header Section -->
   <div class="feed-header">
     <div class="header-content">
@@ -10,6 +49,19 @@
         Discover Amazing Destinations
       </h1>
       <p class="page-subtitle">Explore breathtaking locations around the world and create unforgettable memories</p>
+      
+      <!-- Call to Action for Non-Logged Users -->
+      <div *ngIf="!currentUser" class="auth-cta">
+        <p class="cta-text">Sign in to save your favorite destinations and access exclusive features!</p>
+        <div class="cta-buttons">
+          <button class="cta-primary" (click)="navigateToSignIn()">
+            Get Started
+          </button>
+          <button class="cta-secondary" (click)="navigateToSignUp()">
+            Create Account
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -92,11 +144,11 @@
         <div class="card-actions">
           <button 
             class="explore-button"
-            (click)="viewDestination(destination.id)">
+            (click)="handleExploreMore(destination.id)">
             <svg class="button-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
             </svg>
-            Explore More
+            {{ currentUser ? 'Explore More' : 'Sign in to Explore' }}
           </button>
         </div>
       </div>
