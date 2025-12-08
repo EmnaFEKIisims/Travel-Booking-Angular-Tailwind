@@ -133,4 +133,26 @@ export class DestinationService {
       )
     );
   }
+
+  toggleDestinationLike(destination: Destination): Observable<Destination> {
+    const updatedDestination = {
+      ...destination,
+      liked: !destination.liked,
+      likes: destination.liked 
+        ? Math.max((destination.likes || 0) - 1, 0)
+        : (destination.likes || 0) + 1
+    };
+    return this.http.put<Destination>(`${this.apiUrl}/${destination.id}`, updatedDestination);
+  }
+
+  toggleHotelLike(hotel: Hotel): Observable<Hotel> {
+    const updatedHotel = {
+      ...hotel,
+      liked: !hotel.liked,
+      likes: hotel.liked 
+        ? Math.max((hotel.likes || 0) - 1, 0)
+        : (hotel.likes || 0) + 1
+    };
+    return this.http.put<Hotel>(`${this.hotelsUrl}/${hotel.id}`, updatedHotel);
+  }
 }

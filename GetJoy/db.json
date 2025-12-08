@@ -7,19 +7,19 @@
       "password": "12345"
     },
     {
-      "id": 2,
+      "id": "2",
       "fullName": "Nuhee Boughnim",
       "email": "nuhee@gmail.com",
       "password": "11111"
     },
     {
-      "id": 3,
+      "id": "3",
       "fullName": "Eya Bouaziz",
       "email": "eya@gmail.com",
       "password": "22222"
     },
     {
-      "id": 4,
+      "id": "4",
       "fullName": "Rami Drira",
       "email": "rami@gmail.com",
       "password": "33333"
@@ -27,7 +27,7 @@
   ],
   "destinations": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Santorini Island",
       "country": "Greece",
       "location": "Greece",
@@ -40,7 +40,7 @@
       "flightPrice": 850
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Bali Paradise",
       "country": "Indonesia",
       "location": "Indonesia",
@@ -53,7 +53,7 @@
       "flightPrice": 1200
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Swiss Alps Adventure",
       "country": "Switzerland",
       "location": "Switzerland",
@@ -66,7 +66,7 @@
       "flightPrice": 950
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Tokyo Culture",
       "country": "Japan",
       "location": "Japan",
@@ -79,7 +79,7 @@
       "flightPrice": 1350
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Tuscany Vineyards",
       "country": "Italy",
       "location": "Italy",
@@ -92,7 +92,7 @@
       "flightPrice": 750
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Dubai Luxury",
       "country": "UAE",
       "location": "United Arab Emirates",
@@ -105,7 +105,7 @@
       "flightPrice": 900
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Barcelona Magic",
       "country": "Spain",
       "location": "Spain",
@@ -113,12 +113,12 @@
       "image": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "imageUrl": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
       "rating": 4.9,
-      "likes": 67,
+      "likes": 68,
       "liked": false,
       "flightPrice": 650
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Paris Romance",
       "country": "France",
       "location": "France",
@@ -131,7 +131,7 @@
       "flightPrice": 500
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Maldives Paradise",
       "country": "Maldives",
       "location": "Maldives",
@@ -856,6 +856,12 @@
       "userId": "1",
       "destinationId": null,
       "hotelId": 7
+    },
+    {
+      "id": "33f2",
+      "userId": "1",
+      "destinationId": "7",
+      "hotelId": null
     }
   ]
 }
