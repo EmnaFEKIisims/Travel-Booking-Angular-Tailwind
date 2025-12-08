@@ -155,6 +155,11 @@ export class Feed implements OnInit {
     this.router.navigate(['/liked']);
   }
 
+  navigateToBookings() {
+    // Navigate to user bookings/booking history
+    this.router.navigate(['/booking']);
+  }
+
   handleExploreMore(destinationId: number) {
     if (this.currentUser) {
       // User is logged in, allow navigation to destination details

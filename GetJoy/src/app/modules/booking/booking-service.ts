@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Booking {
   id?: string;
@@ -106,5 +107,12 @@ export class BookingService {
     const totalPrice = roomTotal + flightTotal;
     
     return { roomTotal, flightTotal, totalPrice };
+  }
+
+  // Get bookings for a specific user by email
+  getUserBookings(userEmail: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/bookings`).pipe(
+      map(bookings => bookings.filter(booking => booking.email === userEmail))
+    );
   }
 }

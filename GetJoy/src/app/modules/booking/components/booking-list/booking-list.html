@@ -1,1 +1,140 @@
-<p>booking-list works!</p>
+<!-- Loading State -->
+<div *ngIf="loading" class="min-h-screen bg-gray-50 flex items-center justify-center">
+  <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+</div>
+
+<!-- Main Booking List -->
+<div *ngIf="!loading" class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Main Card Container -->
+    <div class="bg-white rounded-xl shadow-lg p-8">
+      <!-- Header with Back Button -->
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center space-x-4">
+          <button 
+            (click)="goBack()" 
+            class="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <h1 class="text-3xl font-bold text-gray-800">My Bookings</h1>
+        </div>
+      </div>
+
+      <!-- No Bookings State -->
+      <div *ngIf="bookings.length === 0" class="text-center py-16">
+        <div class="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-600 mb-2">No Bookings Yet</h2>
+        <p class="text-gray-500">You haven't made any bookings yet. Start exploring destinations!</p>
+      </div>
+
+      <!-- Bookings List -->
+      <div *ngIf="bookings.length > 0" class="space-y-6">
+        <div *ngFor="let booking of bookings" class="border rounded-lg p-6 hover:shadow-md transition-shadow">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Hotel Image and Info -->
+            <div class="flex space-x-4">
+              <img 
+                [src]="booking.hotelImage || 'https://images.unsplash.com/photo-1566073771259-6a8506099945'" 
+                [alt]="booking.hotelName"
+                class="w-20 h-20 object-cover rounded-lg"
+                (error)="onImageError($event)"
+              >
+              <div>
+                <h3 class="font-semibold text-gray-800">{{ booking.hotelName }}</h3>
+                <p class="text-gray-600 text-sm">{{ booking.destinationName }}</p>
+                <div class="flex items-center mt-1">
+                  <span class="text-yellow-400">
+                    <span *ngFor="let star of getStarArray(booking.hotelStars || 5)">★</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Booking Details -->
+            <div class="space-y-2">
+              <div>
+                <span class="text-sm text-gray-500">Guest Name:</span>
+                <p class="font-medium">{{ booking.firstName }} {{ booking.lastName }}</p>
+              </div>
+              <div>
+                <span class="text-sm text-gray-500">Room Type:</span>
+                <p class="font-medium">{{ booking.roomType }}</p>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <span class="text-sm text-gray-500">Check-in:</span>
+                  <p class="font-medium">{{ formatDate(booking.arrivalDate) }}</p>
+                </div>
+                <div>
+                  <span class="text-sm text-gray-500">Check-out:</span>
+                  <p class="font-medium">{{ formatDate(booking.departureDate) }}</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <span class="text-sm text-gray-500">Guests:</span>
+                  <p class="font-medium">{{ booking.numberOfGuests }}</p>
+                </div>
+                <div>
+                  <span class="text-sm text-gray-500">Rooms:</span>
+                  <p class="font-medium">{{ booking.numberOfRooms }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Price and Flight Info -->
+            <div class="text-right space-y-2">
+              <div>
+                <span class="text-sm text-gray-500">Total Amount</span>
+                <p class="text-2xl font-bold text-blue-600">{{ booking.totalPrice }} TND</p>
+              </div>
+              
+              <div *ngIf="booking.includeFlight" class="text-sm">
+                <div class="bg-blue-50 rounded-lg p-3">
+                  <div class="flex items-center space-x-2 text-blue-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                    <span class="font-medium">
+                      {{ booking.flightType === 'roundTrip' ? 'Round Trip' : 'One Way' }} Flight
+                    </span>
+                  </div>
+                  <p class="text-blue-600 font-semibold">{{ booking.flightTotal }} TND</p>
+                </div>
+              </div>
+
+              <div *ngIf="booking.freePickup" class="text-sm">
+                <div class="bg-green-50 rounded-lg p-3">
+                  <div class="flex items-center space-x-2 text-green-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span class="font-medium">Free Pickup</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-sm text-gray-500">
+                <span>Booked on {{ formatDate(booking.bookingDate) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Special Requests -->
+          <div *ngIf="booking.specialRequests" class="mt-4 pt-4 border-t">
+            <span class="text-sm text-gray-500">Special Requests:</span>
+            <p class="text-sm text-gray-700 mt-1">{{ booking.specialRequests }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

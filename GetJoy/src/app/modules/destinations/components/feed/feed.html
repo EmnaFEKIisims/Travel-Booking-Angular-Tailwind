@@ -32,6 +32,15 @@
           </svg>
           My Favorites
         </button>
+        <button 
+          *ngIf="currentUser" 
+          class="nav-button booking-btn"
+          (click)="navigateToBookings()">
+          <svg class="btn-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          My Bookings
+        </button>
         <span *ngIf="currentUser" class="user-welcome">
           Welcome, {{ currentUser.fullName }}!
         </span>
