@@ -5,10 +5,12 @@ import { UserService } from '../../user-service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { AutoFocusDirective } from '../../../../shared/directives/auto-focus.directive';
+import { ClickEffectDirective } from '../../../../shared/directives/click-effect.directive';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, AutoFocusDirective, ClickEffectDirective],
   templateUrl: './sign-in.html',
   styleUrl: './sign-in.css',
 })

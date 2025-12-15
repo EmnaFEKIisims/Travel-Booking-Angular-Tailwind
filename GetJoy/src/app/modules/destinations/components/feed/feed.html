@@ -50,18 +50,17 @@
 
   <!-- Header Section -->
   <div class="feed-header">
-    <div class="header-content">
-      <h1 class="page-title">
+    <div class="header-content">        <h1 class="page-title">
         <svg class="title-icon" fill="currentColor" viewBox="0 0 20 20">
           <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
-        Discover Amazing Destinations
+        {{ 'Discover Amazing Destinations' | uppercase }}
       </h1>
-      <p class="page-subtitle">Explore breathtaking locations around the world and create unforgettable memories</p>
+      <p class="page-subtitle">{{ 'Explore breathtaking locations around the world and create unforgettable memories' | titlecase }}</p>
       
       <!-- Call to Action for Non-Logged Users -->
       <div *ngIf="!currentUser" class="auth-cta">
-        <p class="cta-text">Sign in to save your favorite destinations and access exclusive features!</p>
+        <p class="cta-text">{{ 'Sign in to save your favorite destinations and access exclusive features!' | lowercase | titlecase }}</p>
         <div class="cta-buttons">
           <button class="cta-primary" (click)="navigateToSignIn()">
             Get Started
@@ -87,7 +86,9 @@
     <div 
       *ngFor="let destination of destinations; trackBy: trackByDestination" 
       class="destination-card"
-      [attr.data-destination-id]="destination.id">
+      [attr.data-destination-id]="destination.id"
+      appHover
+      (click)="navigateToDestination(destination.id)">
       
       <!-- Destination Image -->
       <div class="card-image-container">
@@ -110,8 +111,9 @@
         <button 
           class="like-button"
           [class.liked]="destination.isLiked"
-          (click)="toggleLike(destination)"
-          [disabled]="!currentUser">
+          (click)="toggleLike(destination); $event.stopPropagation()"
+          [disabled]="!currentUser"
+          appClickEffect="#ef4444">
           <svg class="heart-icon" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
           </svg>
@@ -125,11 +127,11 @@
           <svg class="location-icon" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
           </svg>
-          {{ destination.location }}
+          {{ destination.location | uppercase }}
         </div>
 
         <!-- Destination Title -->
-        <h3 class="destination-title">{{ destination.name }}</h3>
+        <h3 class="destination-title">{{ destination.name | titlecase }}</h3>
 
         <!-- Rating -->
         <div class="rating-container" *ngIf="destination.rating">
@@ -143,11 +145,11 @@
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
             </svg>
           </div>
-          <span class="rating-value">{{ destination.rating }}</span>
+          <span class="rating-value">{{ destination.rating | number:'1.1-1' }}</span>
         </div>
 
         <!-- Description -->
-        <p class="destination-description">{{ destination.description }}</p>
+        <p class="destination-description">{{ destination.description | truncate:120:true }}</p>
 
         <!-- Action Buttons -->
         <div class="card-actions">

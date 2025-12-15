@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { DestinationService } from '../../destination-service';
 import { UserService } from '../../../user/user-service';
 import { RouterModule, Router } from '@angular/router';
+import { HoverDirective } from '../../../../shared/directives/hover.directive';
+import { ClickEffectDirective } from '../../../../shared/directives/click-effect.directive';
+import { TruncatePipe } from '../../../../shared/pipes/truncate.pipe';
 
 interface Destination {
   id: number;
@@ -27,7 +30,7 @@ interface Like {
 
 @Component({
   selector: 'app-feed',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, HoverDirective, ClickEffectDirective, TruncatePipe],
   templateUrl: './feed.html',
   styleUrl: './feed.css',
 })
@@ -158,6 +161,10 @@ export class Feed implements OnInit {
   navigateToBookings() {
     // Navigate to user bookings/booking history
     this.router.navigate(['/booking']);
+  }
+
+  navigateToDestination(destinationId: number) {
+    this.router.navigate(['/destination', destinationId]);
   }
 
   handleExploreMore(destinationId: number) {

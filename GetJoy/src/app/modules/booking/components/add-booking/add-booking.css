@@ -2,7 +2,7 @@
 
 /* Alert Styles - Cyan/Blue Theme */
 .alert {
-  @apply rounded-xl p-4 mb-6 border-l-4 animate-pulse mx-auto max-w-md;
+  @apply rounded-xl p-4 mb-6 border-l-4 animate-pulse;
 }
 
 .alert-success {

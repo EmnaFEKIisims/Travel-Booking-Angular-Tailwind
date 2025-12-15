@@ -108,10 +108,22 @@ export class AddBooking implements OnInit {
     
     const formValue = this.bookingForm.value;
     
-    // Calculate room total
+    // Calculate number of nights
+    const arrivalDate = formValue.arrivalDate;
+    const departureDate = formValue.departureDate;
+    let numberOfNights = 1; // Default to 1 night
+    
+    if (arrivalDate && departureDate) {
+      const arrival = new Date(arrivalDate);
+      const departure = new Date(departureDate);
+      const timeDiff = departure.getTime() - arrival.getTime();
+      numberOfNights = Math.max(1, Math.ceil(timeDiff / (1000 * 3600 * 24)));
+    }
+    
+    // Calculate room total (price per night * number of nights * number of rooms)
     const selectedRoom = this.hotel.rooms?.find((r: any) => r.type === formValue.roomType);
     if (selectedRoom) {
-      this.roomTotal = selectedRoom.price * (formValue.numberOfRooms || 1);
+      this.roomTotal = selectedRoom.price * numberOfNights * (formValue.numberOfRooms || 1);
     }
     
     // Calculate flight total
@@ -158,7 +170,7 @@ export class AddBooking implements OnInit {
       this.bookingService.createBooking(bookingData).subscribe({
         next: (savedBooking) => {
           console.log('Booking saved:', savedBooking);
-          this.showAlertMessage('success', `Booking confirmed! Your booking ID is: ${savedBooking.id}. You will receive a confirmation email shortly.`);
+          this.showAlertMessage('success', 'Booking added successfully!');
           setTimeout(() => {
             this.router.navigate(['/feed']);
           }, 3000);
@@ -181,6 +193,14 @@ export class AddBooking implements OnInit {
   }
 
   onCancel() {
+    if (this.hotelId && this.destinationId) {
+      this.router.navigate(['/hotel', this.hotelId]);
+    } else {
+      this.router.navigate(['/feed']);
+    }
+  }
+
+  goBack() {
     if (this.hotelId && this.destinationId) {
       this.router.navigate(['/hotel', this.hotelId]);
     } else {

@@ -48,11 +48,14 @@
                 (error)="onImageError($event)"
               >
               <div>
-                <h3 class="font-semibold text-gray-800">{{ booking.hotelName }}</h3>
-                <p class="text-gray-600 text-sm">{{ booking.destinationName }}</p>
+                <h3 class="font-semibold text-gray-800">{{ booking.hotelName | safe | titlecase }}</h3>
+                <p class="text-gray-600 text-sm">{{ booking.destinationName | safe | titlecase }}</p>
                 <div class="flex items-center mt-1">
                   <span class="text-yellow-400">
                     <span *ngFor="let star of getStarArray(booking.hotelStars || 5)">★</span>
+                  </span>
+                  <span class="text-xs text-gray-500 ml-2">
+                    Réservé {{ booking.bookingDate | timeAgo }}
                   </span>
                 </div>
               </div>
@@ -62,20 +65,20 @@
             <div class="space-y-2">
               <div>
                 <span class="text-sm text-gray-500">Guest Name:</span>
-                <p class="font-medium">{{ booking.firstName }} {{ booking.lastName }}</p>
+                <p class="font-medium">{{ (booking.firstName + ' ' + booking.lastName) | titlecase | safe }}</p>
               </div>
               <div>
                 <span class="text-sm text-gray-500">Room Type:</span>
-                <p class="font-medium">{{ booking.roomType }}</p>
+                <p class="font-medium">{{ booking.roomType | titlecase | safe }}</p>
               </div>
               <div class="grid grid-cols-2 gap-2">
                 <div>
                   <span class="text-sm text-gray-500">Check-in:</span>
-                  <p class="font-medium">{{ formatDate(booking.arrivalDate) }}</p>
+                  <p class="font-medium">{{ booking.arrivalDate | date:'shortDate' | safe }}</p>
                 </div>
                 <div>
                   <span class="text-sm text-gray-500">Check-out:</span>
-                  <p class="font-medium">{{ formatDate(booking.departureDate) }}</p>
+                  <p class="font-medium">{{ booking.departureDate | date:'shortDate' | safe }}</p>
                 </div>
               </div>
               <div class="grid grid-cols-2 gap-2">

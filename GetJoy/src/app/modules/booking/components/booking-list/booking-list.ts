@@ -4,11 +4,14 @@ import { RouterModule, Router } from '@angular/router';
 import { BookingService } from '../../booking-service';
 import { UserService } from '../../../user/user-service';
 import { DestinationService } from '../../../destinations/destination-service';
+import { TruncatePipe } from '../../../../shared/pipes/truncate.pipe';
+import { TimeAgoPipe } from '../../../../shared/pipes/time-ago.pipe';
+import { SafePipe } from '../../../../shared/pipes/safe.pipe';
 
 @Component({
   selector: 'app-booking-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TruncatePipe, TimeAgoPipe, SafePipe],
   templateUrl: './booking-list.html',
   styleUrl: './booking-list.css',
 })

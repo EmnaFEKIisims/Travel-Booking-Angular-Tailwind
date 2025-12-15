@@ -138,7 +138,13 @@ export class HotelDetails implements OnInit {
   }
 
   goBack() {
-    history.back();
+    // Navigate back to destination details instead of using history.back()
+    if (this.destinationId) {
+      this.router.navigate(['/destination', this.destinationId]);
+    } else {
+      // Fallback to feed if destinationId is not available
+      this.router.navigate(['/destination']);
+    }
   }
 
   onImageError(event: any) {

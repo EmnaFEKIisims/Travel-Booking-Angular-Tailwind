@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom animations for directives */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Hover effects */
+.destination-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Click effect positioning */
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Highlight mark styling */
+mark {
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.375rem;
+}
